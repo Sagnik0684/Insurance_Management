@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Logged Out</title>
+    <script>
+      function countdownRedirect(seconds) {
+        var countdownElement = document.getElementById('countdown');
+        var redirectUrl = 'http://localhost:8000/';
+        var interval = setInterval(function() {
+          if (seconds > 0) {
+            countdownElement.textContent = seconds + ' seconds';
+            seconds--;
+          } else {
+            clearInterval(interval);
+            window.location.href = redirectUrl;
+          }
+        }, 1000);
+      }
+      
+      window.onload = function() {
+        countdownRedirect(5); // Set countdown duration here (in seconds)
+      };
+    </script>
+  </head>
+  <body>
+    {% include "insurance/navbar.html" %}
+    <br><br><br><br><br>
+    <img src="{% static 'image/logout_img.png' %}" class="logout-image">
+    <p>You have been logged out. Redirecting in <span id="countdown">5 seconds</span>...</p>
+<div id="countdown-container">
+  <p>Time remaining before logout: <span id="countdown">5 seconds</span></p>
+</div>
+
+<br><br><br><br><br>
+<br><br><br><br><br>
+<br><br>
+{% include "insurance/footer.html" %}
+</body>
+</html>
