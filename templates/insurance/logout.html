@@ -4,6 +4,16 @@
   <head>
     <meta charset="utf-8">
     <title>Logged Out</title>
+    <style>
+      .centered {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+        text-align: center;
+      }
+    </style>
     <script>
       function countdownRedirect(seconds) {
         var countdownElement = document.getElementById('countdown');
@@ -26,16 +36,12 @@
   </head>
   <body>
     {% include "insurance/navbar.html" %}
-    <br><br><br><br><br>
-    <img src="{% static 'image/logout_img.png' %}" class="logout-image">
-    <p>You have been logged out. Redirecting in <span id="countdown">5 seconds</span>...</p>
-<div id="countdown-container">
-  <p>Time remaining before logout: <span id="countdown">5 seconds</span></p>
-</div>
+    
+    <div class="centered">
+      <img src="{% static 'image/logout_img.png' %}" class="logout-image" style="width: 800px; height: 100px;">
+      <p>You have been logged out. Redirecting in <span id="countdown">5 seconds</span>...</p>
+    </div>
 
-<br><br><br><br><br>
-<br><br><br><br><br>
-<br><br>
-{% include "insurance/footer.html" %}
-</body>
+    {% include "insurance/footer.html" %}
+  </body>
 </html>
