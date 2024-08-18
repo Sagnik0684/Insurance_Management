@@ -2,7 +2,6 @@
 {% load widget_tweaks %}
 {% block content %}
 
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,50 +36,50 @@
         background: #663a30;
       }
   
-  
       .card {
-        
         -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
         box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
         border: 1px solid black;
         margin-bottom: 30px;
         -webkit-transition: all 0.3s ease-in-out;
         transition: all 0.3s ease-in-out;
+        height: 180px; /* Set a fixed height */
+        width: 100%; /* Make it responsive to the container */
       }
-  
+
       .card .card-block {
-        padding: 25px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
-  
+
       .order-card i {
         font-size: 26px;
       }
-  
+
       .f-left {
         float: left;
       }
-  
+
       .f-right {
         float: right;
       }
+      
       header {
-      left: 0px;
-      right: 0px;
-    }
+        left: 0px;
+        right: 0px;
+      }
     </style>
   </head>
 
-
   <div class="container">
-
-    
     <div class="row">
       <div class="col-md-4 col-xl-3">
         <div class="card bg-c-green order-card">
           <div class="card-block">
             <h6 class="m-b-20"> <a href="admin-view-customer" style="text-decoration: none;color:white;">Total Registered User</a> </h6>
-            <h2 class="text-right"><i  class="fas fa-users f-left"></i><span>{{total_user}}</span></h2>
-            
+            <h2 class="text-right"><i class="fas fa-users f-left"></i><span>{{total_user}}</span></h2>
           </div>
         </div>
       </div>
@@ -90,7 +89,6 @@
           <div class="card-block">
             <h6 class="m-b-20"><a href="admin-view-policy" style="text-decoration: none;color:white;">Listed Policies</a> </h6>
             <h2 class="text-right"><i class="fab fa-product-hunt f-left"></i><span>{{total_policy}}</span></h2>
-            
           </div>
         </div>
       </div>
@@ -99,8 +97,7 @@
         <div class="card bg-c-green order-card">
           <div class="card-block">
             <h6 class="m-b-20"><a href="admin-view-category" style="text-decoration: none;color:white;">Listed Categories</a></h6>
-           <h2 class="text-right"><i class="fas fa-list-alt f-left"></i><span>{{total_category}}</span></h2>
-            
+            <h2 class="text-right"><i class="fas fa-list-alt f-left"></i><span>{{total_category}}</span></h2>
           </div>
         </div>
       </div>
@@ -108,24 +105,21 @@
       <div class="col-md-4 col-xl-3">
         <div class="card bg-c-green order-card">
           <div class="card-block">
-            <h6 class="m-b-20"><a href="admin-question" style="text-decoration: none;color:white;">Total Question</a></h6>
+            <h6 class="m-b-20"><a href="admin-question" style="text-decoration: none;color:white;">Total Questions</a></h6>
             <h2 class="text-right"><i class="fas fa-question-circle f-left"></i><span>{{total_question}}</span></h2>
-            
           </div>
         </div>
       </div>
-
-      
     </div>
 
     <br>
+
     <div class="row">
       <div class="col-md-4 col-xl-3">
         <div class="card bg-c-green order-card">
           <div class="card-block">
             <h6 class="m-b-20"> <a href="admin-view-policy-holder" style="text-decoration: none;color:white;">Total Applied Policy Holder</a> </h6>
             <h2 class="text-right"><i class="fas fa-user-cog f-left"></i><span>{{total_policy_holder}}</span></h2>
-            
           </div>
         </div>
       </div>
@@ -135,7 +129,6 @@
           <div class="card-block">
             <h6 class="m-b-20"><a href="admin-view-approved-policy-holder" style="text-decoration: none;color:white;">Approved Policy Holder</a> </h6>
             <h2 class="text-right"><i class="fas fa-user-check f-left"></i><span>{{approved_policy_holder}}</span></h2>
-            
           </div>
         </div>
       </div>
@@ -144,8 +137,7 @@
         <div class="card bg-c-green order-card">
           <div class="card-block">
             <h6 class="m-b-20"><a href="admin-view-disapproved-policy-holder" style="text-decoration: none;color:white;">Disapproved Policy Holder</a></h6>
-           <h2 class="text-right"><i class="fas fa-user-times f-left"></i><span>{{disapproved_policy_holder}}</span></h2>
-            
+            <h2 class="text-right"><i class="fas fa-user-times f-left"></i><span>{{disapproved_policy_holder}}</span></h2>
           </div>
         </div>
       </div>
@@ -155,22 +147,14 @@
           <div class="card-block">
             <h6 class="m-b-20"><a href="admin-view-waiting-policy-holder" style="text-decoration: none;color:white;">Policy Holder Waiting For Approval</a></h6>
             <h2 class="text-right"><i class="fas fa-user-clock f-left"></i><span>{{waiting_policy_holder}}</span></h2>
-            
           </div>
         </div>
       </div>
-
-      
     </div>
-
-  
-
   </div>
 
+  <br><br><br><br><br><br>
 
-<br><br><br><br><br><br>
-
-<script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 
 {% endblock content %}

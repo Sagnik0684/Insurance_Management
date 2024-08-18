@@ -2,7 +2,6 @@
 {% load widget_tweaks %}
 {% block content %}
 
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,6 +11,7 @@
     <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
     <style type="text/css">
       a:link {
         text-decoration: none;
@@ -26,7 +26,7 @@
       }
   
       .bg-c-green {
-        background:#4C51BF;
+        background: #4C51BF;
       }
   
       .bg-c-yellow {
@@ -37,48 +37,48 @@
         background: #663a30;
       }
   
-  
+      /* Add a top margin to lower the boxes */
+      .container {
+        margin-top: 80px; /* Increased margin to lower the boxes further */
+      }
+
+      /* Card styling for aesthetic appeal */
       .card {
-        
-        -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
-        box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
-        border: 1px solid black;
-        margin-bottom: 30px;
-        -webkit-transition: all 0.3s ease-in-out;
-        transition: all 0.3s ease-in-out;
+        border-radius: 15px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition effects */
       }
-  
+
+      /* Increase padding inside the cards */
       .card .card-block {
-        padding: 25px;
+        padding: 35px; /* More space inside the card */
       }
-  
-      .order-card i {
-        font-size: 26px;
+
+      /* Hover effect for cards */
+      .card:hover {
+        transform: translateY(-10px); /* Slight lift on hover */
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
       }
-  
-      .f-left {
-        float: left;
+
+      /* Optional: Adjust text alignment and color for aesthetics */
+      .card h6 {
+        text-align: center; /* Center-align the headings */
+        color: #ffffff; /* Ensure text color contrasts with the background */
       }
-  
-      .f-right {
-        float: right;
+
+      .card i {
+        color: #ffffff; /* Icon color to match the text */
       }
-      header {
-      left: 0px;
-      right: 0px;
-    }
     </style>
-  </head>
+</head>
 
-
-  <div class="container">
+<div class="container">
     <div class="row">
       <div class="col-md-4 col-xl-3">
         <div class="card bg-c-green order-card">
           <div class="card-block">
-            <h6 class="m-b-20"> <a href="apply-policy" style="text-decoration: none;color:white;">Available Policy</a> </h6>
-            <h2 class="text-right"><i  class="fab fa-product-hunt f-left"></i><span>{{available_policy}}</span></h2>
-            
+            <h6 class="m-b-20"><a href="apply-policy" style="text-decoration: none;color:white;">Available Policy</a></h6>
+            <h2 class="text-right"><i class="fab fa-product-hunt f-left"></i><span>{{available_policy}}</span></h2>
           </div>
         </div>
       </div>
@@ -86,9 +86,8 @@
       <div class="col-md-4 col-xl-3">
         <div class="card bg-c-green order-card">
           <div class="card-block">
-            <h6 class="m-b-20"><a href="history" style="text-decoration: none;color:white;">Applied Policy</a> </h6>
+            <h6 class="m-b-20"><a href="history" style="text-decoration: none;color:white;">Applied Policy</a></h6>
             <h2 class="text-right"><i class="fab fa-product-hunt f-left"></i><span>{{applied_policy}}</span></h2>
-            
           </div>
         </div>
       </div>
@@ -97,8 +96,7 @@
         <div class="card bg-c-green order-card">
           <div class="card-block">
             <h6 class="m-b-20"><a href="/" style="text-decoration: none;color:white;">Policy Categories</a></h6>
-           <h2 class="text-right"><i class="fas fa-list-alt f-left"></i><span>{{total_category}}</span></h2>
-            
+            <h2 class="text-right"><i class="fas fa-list-alt f-left"></i><span>{{total_category}}</span></h2>
           </div>
         </div>
       </div>
@@ -106,21 +104,16 @@
       <div class="col-md-4 col-xl-3">
         <div class="card bg-c-green order-card">
           <div class="card-block">
-            <h6 class="m-b-20"><a href="question-history" style="text-decoration: none;color:white;">Total Question Asked</a></h6>
+            <h6 class="m-b-20"><a href="question-history" style="text-decoration: none;color:white;">Total Questions Asked</a></h6>
             <h2 class="text-right"><i class="fas fa-question-circle f-left"></i><span>{{total_question}}</span></h2>
-            
           </div>
         </div>
       </div>
-
-      
     </div>
-  </div>
-
+</div>
 
 <br><br><br><br><br><br><br><br><br><br>
 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-
 
 {% endblock content %}
