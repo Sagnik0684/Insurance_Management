@@ -11,6 +11,15 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
   <style type="text/css">
+    .navbar-nav-left {
+    position: relative;
+    display: flex;
+    align-items: center; /* Align items vertically */
+  }
+
+  .nav-item, .separator {
+    margin: 0 2px; /* Reduce the margin between elements */
+  }
     .bs-example {
       margin: 0px;
     }
@@ -37,20 +46,42 @@
     .navbar-nav-right {
       position: absolute;
       right: 10px;
-      top: 0;
+      top: 0.2px;
     }
 
-    .nav-item {
+    .nav-item,.separator {
       background-color: #06090c;
       padding: 5px 10px;
       margin: 5px;
       border-radius: 5px;
       color: hsl(0, 27%, 96%);
-      font-weight: bold; 
+      font-weight: bold;
     }
 
     .nav-item:hover {
-      background-color: #090707; 
+      background-color: #090707;
+    }
+
+    .dropdown-menu {
+      background-color: #06090c;
+      border-radius: 5px;
+    }
+
+    .dropdown-item {
+      color: hsl(0, 27%, 96%);
+      font-weight: bold;
+    }
+
+    .dropdown-item:hover {
+      background-color: #7c7171;
+    }
+
+    /* Style for the '/' separator */
+    .separator {
+      color: hsl(0, 27%, 96%);
+      font-weight: bold;
+      padding: 5px 10px;
+      margin: 5px;
     }
   </style>
 </head>
@@ -59,15 +90,27 @@
 
   <div class="bs-example">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #000000;">
-      <a href="/" class="navbar-brand">Insurance Management System</a> 
+      <a href="/" class="navbar-brand">Insurance Management System</a>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
         <div class="navbar-nav navbar-nav-left">
-          <a href="/customer/customerclick" class="nav-item nav-link">Customer</a>
-          <a href="/adminlogin" class="nav-item nav-link">Admin</a>
+          <!-- Login Dropdown -->
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" id="loginDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</a>
+            <div class="dropdown-menu" aria-labelledby="loginDropdown">
+              <a class="dropdown-item" href="/adminlogin">Login as Administrator</a>
+              <a class="dropdown-item" href="/customer/customerclick">Login as Customer</a>
+            </div>
+          </div>
+
+          <!-- Separator -->
+          <span class="separator">/</span>
+
+          <!-- Register Link -->
+          <a href="/register" class="nav-item nav-link">Register</a>
         </div>
 
         <div class="navbar-nav navbar-nav-right">
