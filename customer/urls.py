@@ -14,4 +14,6 @@ urlpatterns = [
 
     path('ask-question', views.ask_question_view,name='ask-question'),
     path('question-history', views.question_history_view,name='question-history'),
+
+    path('premium-interest-calculator/', views.premium_interest_calculator_view, name='premium-interest-calculator'),
 ]

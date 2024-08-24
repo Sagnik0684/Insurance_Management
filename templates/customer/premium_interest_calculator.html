@@ -1,0 +1,49 @@
+{% extends 'customer/customerbase.html' %}
+{% load widget_tweaks %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+      </style>
+  </head>
+
+<div class="container mt-5">
+    <h2 class="text-center">Premium and Interest Calculator</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="principal">Principal Amount:</label>
+            <input type="number" name="principal" class="form-control" id="principal" required>
+        </div>
+        <div class="form-group">
+            <label for="rate">Interest Rate (%):</label>
+            <input type="number" name="rate" class="form-control" id="rate" required>
+        </div>
+        <div class="form-group">
+            <label for="time">Time (Years):</label>
+            <input type="number" name="time" class="form-control" id="time" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Calculate</button>
+    </form>
+
+    {% if interest %}
+    <div class="mt-4">
+        <h4>Calculation Result:</h4>
+        <p>Interest: {{ interest }}</p>
+        <p>Total Amount: {{ total_amount }}</p>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
+{% endblock content %}

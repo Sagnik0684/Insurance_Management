@@ -92,3 +92,26 @@ def question_history_view(request):
     questions = CMODEL.Question.objects.all().filter(customer=customer)
     return render(request,'customer/question_history.html',{'questions':questions,'customer':customer})
 
+def premium_interest_calculator_view(request):
+    if request.method == 'POST':
+        # Fetch data from the form submission
+        principal = float(request.POST.get('principal', 0))
+        rate = float(request.POST.get('rate', 0))
+        time = float(request.POST.get('time', 0))
+        
+        # Calculate simple interest
+        interest = (principal * rate * time) / 100
+        total_amount = principal + interest
+        
+        context = {
+            'principal': principal,
+            'rate': rate,
+            'time': time,
+            'interest': interest,
+            'total_amount': total_amount,
+        }
+        
+        return render(request, 'customer/premium_interest_calculator.html', context)
+    
+    return render(request, 'customer/premium_interest_calculator.html')
+
