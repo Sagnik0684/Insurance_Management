@@ -4,7 +4,6 @@
 
 <head>
   <meta charset="utf-8">
-  
 
   <style media="screen">
     a:link {
@@ -14,7 +13,7 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: "Gill Sans", sans-serif;;
+      font-family: "Gill Sans", sans-serif;
     }
 
     header {
@@ -25,16 +24,23 @@
       z-index: 1;
     }
 
+    .left_area {
+      display: flex;
+      align-items: center; /* Align logo and text vertically */
+    }
+
     .left_area h3 {
       color: #fff;
-      margin: 0px;
+      margin: 0;
       text-transform: uppercase;
       font-size: 22px;
       font-weight: 900;
     }
 
-    .left_area span {
-      color: #19B3D3;
+    .left_area img {
+      width: 30px;
+      height: 30px;
+      margin-right: 10px; /* Add space between logo and text */
     }
 
     .logout_btn {
@@ -49,7 +55,6 @@
       font-weight: 600;
       color: #fff;
       transition: 0.5s;
-
     }
 
     .logout_btn:hover {
@@ -90,7 +95,6 @@
       padding-left: 40px;
       box-sizing: border-box;
       transition: 0.5s;
-
     }
 
     .sidebar a:hover {
@@ -151,10 +155,7 @@
     }
   </style>
 
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-
-
 </head>
 
 <body>
@@ -163,10 +164,12 @@
   <!--header area start-->
   <header style="padding-top: 0px;">
     <label for="check">
-      <i style=""class="fas fa-bars" id="sidebar_btn"></i>
+      <i class="fas fa-bars" id="sidebar_btn"></i>
     </label>
     <div class="left_area">
-      <h3>Insurance Management</h3>
+      <a href="/">
+        <h3>Insure Hub</h3>
+      </a>
     </div>
     <div class="right_area">
       <a href="/logout" class="logout_btn">Logout</a>
@@ -174,38 +177,25 @@
   </header>
   <!--header area end-->
   <!--sidebar start-->
-  <div class="sidebar" style="
-    margin-top: 50px;
-">
+  <div class="sidebar" style="margin-top: 50px;">
     <center>
-
       <img src="{% static "image/admin.png" %}" class="profile_image" alt="">
       <h4>Admin</h4>
-
     </center>
-
     <a href="/admin-dashboard"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
     <a href="/admin-view-customer"><i class="fas fa-users"></i><span>Customer</span></a>
     <a href="/admin-category"><i class="fas fa-list-alt"></i><span>Category</span></a>
     <a href="/admin-policy"><i class="fab fa-product-hunt"></i><span>Policy</span></a>
     <a href="/admin-question"><i class="fas fa-question-circle"></i><span>Questions</span></a>
-    
-
-
   </div>
   <!--sidebar end-->
-
 
   <!--content start-->
   <div class="content">
     <br><br><br><br><br>
     {% block content %}
-
     {% endblock content %}
-
-
     <br><br><br>
- 
   </div>
   <!--content end-->
 </body>
