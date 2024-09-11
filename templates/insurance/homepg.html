@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    .xyz {
+      margin-bottom: 0px;
+      background-image: url('{% static "image/homepage1.jpg" %}');
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 100vh; /* Ensure it takes full screen */
+    }
+    .jumbotron {
+      background-color: transparent; /* Ensure sections stand out */
+      color: white;
+    }
+    #about-section {
+    min-height: 100vh; /* Full viewport height */
+    background-image: url('{% static "image/aboutus.jpeg" %}');
+    background-size: cover; /* Cover the entire section */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* No repeat */
+    color: white; /* Text color for better contrast */
+    padding: 20px;
+  }
+
+  #contact-section {
+    min-height: 100vh; /* Full viewport height */
+    background-image: url('{% static "image/Contactus.jpeg" %}');
+    background-size: cover; /* Cover the entire section */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* No repeat */
+    color: white; /* Text color for better contrast */
+    padding: 20px; /* Adjust padding as needed */
+  }
+
+  /* Additional styling for better appearance */
+  .jumbotron {
+    margin-bottom: 20px;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- Include Navbar -->
+  {% include "insurance/navbar.html" %}
+  
+  <!-- Main Section with Background Image -->
+  <section id="main-section" class="jumbotron xyz d-flex justify-content-center align-items-center">
+    <div class="container text-center">
+      <h1>Welcome to Insure Hub</h1>
+      <p>Your peace of mind is our priority.</p>
+      <a href="#about-section" class="btn btn-primary btn-lg">Learn More</a>
+    </div>
+  </section>
+
+  <!-- About Us Section -->
+  <section id="about-section" class="umbotron jumbotron-fluid d-flex justify-content-center align-items-center xyz-about">
+    <div class="container text-center">
+      <h2>Know Us</h2>
+      <p class="lead">“Your peace of mind is our priority. We protect what matters most, so you can focus on living your life to the fullest.”</p>
+      <h4>Explore our Website</h4>
+      <a class="btn btn-primary btn-lg" href="/" role="button">HOME</a>
+    </div>
+  </section>
+
+  <!-- Contact Us Section -->
+  <section id="contact-section" class="umbotron jumbotron-fluid d-flex justify-content-center align-items-center xyz-about">
+    <h3>Send Us Your Valuable Feedback</h3>
+    <form method="POST" autocomplete="off">
+      {% csrf_token %}
+      <div class="form-group">
+        {{ form.as_p }}
+        <input type="submit" value="Send Message" class="btn btn-primary btn-lg">
+      </div>
+    </form>
+  </section>
+
+  {% include "insurance/footer.html" %}
+</body>
+
+</html>

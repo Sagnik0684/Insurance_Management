@@ -9,7 +9,7 @@ urlpatterns = [
 
 
     path('customer/',include('customer.urls')),
-    path('',views.home_view,name=''),
+    path('',views.home_view,name='home'),
     path('logout', LogoutView.as_view(template_name='insurance/logout.html'),name='logout'),
     path('aboutus', views.aboutus_view),
     path('contactus', views.contactus_view),

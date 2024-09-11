@@ -12,14 +12,14 @@
 
   <style type="text/css">
     .navbar-nav-left {
-    position: relative;
-    display: flex;
-    align-items: center; /* Align items vertically */
-  }
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
 
-  .nav-item, .separator {
-    margin: 0 2px; /* Reduce the margin between elements */
-  }
+    .nav-item, .separator {
+      margin: 0 2px;
+    }
     .bs-example {
       margin: 0px;
     }
@@ -49,7 +49,7 @@
       top: 0.2px;
     }
 
-    .nav-item,.separator {
+    .nav-item, .separator {
       background-color: #06090c;
       padding: 5px 10px;
       margin: 5px;
@@ -76,7 +76,6 @@
       background-color: #7c7171;
     }
 
-    /* Style for the '/' separator */
     .separator {
       color: hsl(0, 27%, 96%);
       font-weight: bold;
@@ -100,19 +99,12 @@
 
       <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
         <div class="navbar-nav navbar-nav-left">
-          <!-- Login Dropdown -->
-          <div class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" id="loginDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</a>
-            <div class="dropdown-menu" aria-labelledby="loginDropdown">
-              <a class="dropdown-item" href="/adminlogin">Login as Administrator</a>
-              <a class="dropdown-item" href="/customer/customerclick">Login as Customer</a>
-            </div>
-          </div>
+          <a href="/customer/customerclick" class="nav-item nav-link">Login</a>
         </div>
 
         <div class="navbar-nav navbar-nav-right">
-          <a href="/aboutus" class="nav-item nav-link">About Us</a>
-          <a href="/contactus" class="nav-item nav-link">Contact Us</a>
+          <a href="#about-section" class="nav-item nav-link">About Us</a>
+          <a href="#contact-section" class="nav-item nav-link">Contact Us</a>
         </div>
       </div>
     </nav>
