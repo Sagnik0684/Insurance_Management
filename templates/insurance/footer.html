@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        /* Footer Styling */
+        footer {
+            background-color: #212529;
+            color: white;
+            height: 25vh; /* Occupies 1/4th of the page height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            padding: 20px;
+        }
+        /* Flexbox to center content */
+        .footer-content {
+            text-align: center;
+        }
+
+        .footer-content h4 {
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .footer-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-content ul li {
+            font-size: 18px;
+        }
+
+        /* Media Queries for smaller screens */
+        @media (max-width: 768px) {
+            footer {
+                height: auto; /* Allow footer to adjust for smaller screens */
+                padding: 10px;
+            }
+            .footer-content h4 {
+                font-size: 20px;
+            }
+            .footer-content ul li {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-content">
+            <h4>Designed and Developed by:</h4>
+            <ul>
+                <li>Member 1: Sagnik Biswas (Team Lead)</li>
+                <li>Member 2: Soham Dutta</li>
+                <li>Member 3: Nikhil Sharma</li>
+                <li>Member 4: Arindam Bagchi</li>
+                <li>Member 5: Debmalya Das</li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+</html>
