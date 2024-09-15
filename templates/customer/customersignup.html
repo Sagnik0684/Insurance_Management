@@ -4,71 +4,85 @@
   <head>
     <meta charset="utf-8">
     <style>
-
-        form{
-           margin: 50px; 
-          
+        /* Add the CSS styles here */
+        html, body {
+          height: 100%; /* Full height for HTML and body */
+          margin: 0; /* Remove default margin */
         }
 
+        body {
+          display: flex;
+          justify-content: center; /* Center horizontally */
+          align-items: center; /* Center vertically */
+          flex-direction: column; /* Stack content vertically */
+        }
+
+        form {
+          width: 100%; /* Full width */
+          max-width: 600px; /* Maximum width for better readability */
+          margin: 50px auto; /* Centered horizontally with margin */
+        }
+
+        .container {
+          display: flex;
+          flex-direction: column;
+          justify-content: center; /* Center vertically */
+          align-items: center; /* Center horizontally */
+          height: 100vh; /* Full viewport height */
+        }
     </style>
   </head>
   <body>
     {% include "insurance/navbar.html" %}
  
+    <div class="container">
+      <h2 style="text-align: center;color: red;">CUSTOMER SIGNUP</h2>
+      <form method="POST" autocomplete="off" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="username">Username</label>
+              {% render_field userForm.username|attr:'required:true'  class="form-control" placeholder="username" %}
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">Password</label>
+              {% render_field userForm.password|attr:'required:true'  class="form-control" placeholder="password" %}
+            </div>
+          </div>
 
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="first_name">First Name</label>
+                {% render_field userForm.first_name|attr:'required:true'  class="form-control" placeholder="First Name" %}
+              </div>
+              <div class="form-group col-md-6">
+                <label for="last_name">Last Name</label>
+                {% render_field userForm.last_name|attr:'required:true'  class="form-control" placeholder="Last Name" %}
+              </div>
+            </div>
 
-<br><br><br>
-<h2 style="text-align: center;color: red;">CUSTOMER SIGNUP</h2>
-<form method="POST" autocomplete="off" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="username">Username</label>
-        {% render_field userForm.username|attr:'required:true'  class="form-control" placeholder="username" %}
-      </div>
-      <div class="form-group col-md-6">
-        <label for="inputPassword4">Password</label>
-        {% render_field userForm.password|attr:'required:true'  class="form-control" placeholder="password" %}
-      </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="mobile">Mobile</label>
+                {% render_field customerForm.mobile|attr:'required:true'  class="form-control" placeholder="Mobile" %}
+              </div>
+              <div class="form-group col-md-6">
+                <label for="address">Address</label>
+                {% render_field customerForm.address|attr:'required:true'  class="form-control" placeholder="Address" %}
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label for="profile_pic">Profile Picture</label>
+                {% render_field customerForm.profile_pic|attr:'required:true' class="form-control" placeholder="" %}
+              </div>
+            </div>
+
+            <div style ="text-align: center;">
+              <br><button type="submit" class="btn btn-primary">Sign Up</button>
+            </div>
+      </form>
     </div>
-
-    <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="first_name">First Name</label>
-          {% render_field userForm.first_name|attr:'required:true'  class="form-control" placeholder="First Name" %}
-        </div>
-        <div class="form-group col-md-6">
-          <label for="last_name">Last Name</label>
-          {% render_field userForm.last_name|attr:'required:true'  class="form-control" placeholder="Last Name" %}
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="mobile">Mobile</label>
-          {% render_field customerForm.mobile|attr:'required:true'  class="form-control" placeholder="Mobile" %}
-        </div>
-        <div class="form-group col-md-6">
-          <label for="address">Address</label>
-          {% render_field customerForm.address|attr:'required:true'  class="form-control" placeholder="Address" %}
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-group col-md-12">
-          <label for="profile_pic">Profile Picture</label>
-          {% render_field customerForm.profile_pic|attr:'required:true' class="form-control" placeholder="" %}
-        </div>
-        
-      </div>
-
-      <div style ="text-align: center;">
-        <br><button type="submit" class="btn btn-primary">Sign Up</button>
-      </div>
-  </form>
-
-
-<br><br>
-{% include "insurance/footer.html" %}
   </body>
 </html>
