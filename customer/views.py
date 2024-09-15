@@ -11,33 +11,55 @@ from django.core.mail import send_mail
 from insurance import models as CMODEL
 from insurance import forms as CFORM
 from django.contrib.auth.models import User
-
+from django.urls import reverse
 
 def customerclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
     return render(request,'customer/customerclick.html')
 
-
 def customer_signup_view(request):
     userForm = forms.CustomerUserForm()
     customerForm = forms.CustomerForm()
     mydict = {'userForm': userForm, 'customerForm': customerForm}
-    
+
     if request.method == 'POST':
+        print("POST request received")  # Debugging point 1
         userForm = forms.CustomerUserForm(request.POST)
         customerForm = forms.CustomerForm(request.POST, request.FILES)
+        
+        # Ensure that both forms are valid
         if userForm.is_valid() and customerForm.is_valid():
-            user = userForm.save()
-            user.set_password(user.password)
+            print("Forms are valid")  # Debugging point 2
+
+            # Save the user and customer form
+            user = userForm.save(commit=False)
+            user.set_password(user.password)  # Encrypt password
             user.save()
+
             customer = customerForm.save(commit=False)
             customer.user = user
             customer.save()
-            my_customer_group = Group.objects.get_or_create(name='CUSTOMER')
-            my_customer_group[0].user_set.add(user)
-            return HttpResponseRedirect('customerlogin')
+
+            # Add user to the 'CUSTOMER' group
+            my_customer_group, created = Group.objects.get_or_create(name='CUSTOMER')
+            my_customer_group.user_set.add(user)
+
+            print("Account created. Redirecting to success page.")  # Debugging point 3
+
+            # Redirect to account creation success page
+            return redirect('account_creation_success')
+        
+        else:
+            # If form is invalid, print errors (for debugging)
+            print("User form errors: ", userForm.errors)
+            print("Customer form errors: ", customerForm.errors)
+    
+    print("Rendering signup page")  # Debugging point 4
+    # Render the signup page with the forms
     return render(request, 'customer/customersignup.html', context=mydict)
+def account_creation_success_view(request):
+    return render(request, 'customer/account_creation_success.html')
 
 def is_customer(user):
     return user.groups.filter(name='CUSTOMER').exists()
@@ -92,26 +114,14 @@ def question_history_view(request):
     questions = CMODEL.Question.objects.all().filter(customer=customer)
     return render(request,'customer/question_history.html',{'questions':questions,'customer':customer})
 
-def premium_interest_calculator_view(request):
-    if request.method == 'POST':
-        # Fetch data from the form submission
-        principal = float(request.POST.get('principal', 0))
-        rate = float(request.POST.get('rate', 0))
-        time = float(request.POST.get('time', 0))
-        
-        # Calculate simple interest
-        interest = (principal * rate * time) / 100
-        total_amount = principal + interest
-        
-        context = {
-            'principal': principal,
-            'rate': rate,
-            'time': time,
-            'interest': interest,
-            'total_amount': total_amount,
-        }
-        
-        return render(request, 'customer/premium_interest_calculator.html', context)
-    
-    return render(request, 'customer/premium_interest_calculator.html')
 
+def premium_interest_calculator_view(request): 
+    if request.method == 'POST': # Fetch data from the form submission 
+        principal = float(request.POST.get('principal', 0)) 
+        rate = float(request.POST.get('rate', 0)) 
+        time = float(request.POST.get('time', 0)) # Calculate simple interest 
+        interest = (principal * rate * time) / 100 
+        total_amount = principal + interest   
+        context = { 'principal': principal, 'rate': rate, 'time': time, 'interest': interest, 'total_amount': total_amount, } 
+        return render(request, 'customer/premium_interest_calculator.html', context) 
+        return render(request, 'customer/premium_interest_calculator.html')
