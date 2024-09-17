@@ -140,3 +140,5 @@ def premium_interest_calculator_view(request):
     
     # Handle GET requests
     return render(request, 'customer/premium_interest_calculator.html')
+
+

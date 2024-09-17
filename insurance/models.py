@@ -32,3 +32,5 @@ class Question(models.Model):
     asked_date =models.DateField(auto_now=True)
     def __str__(self):
         return self.description
+    
+    

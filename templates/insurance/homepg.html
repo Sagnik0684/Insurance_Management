@@ -19,36 +19,30 @@
       background-image: url('{% static "image/homepage1.jpg" %}');
       background-size: cover;
       background-repeat: no-repeat;
-      height: 100vh; /* Ensure it takes full screen */
+      height: 100vh;
     }
     .jumbotron {
-      background-color: transparent; /* Ensure sections stand out */
+      background-color: transparent;
       color: white;
     }
     #about-section {
-    min-height: 100vh; /* Full viewport height */
-    background-image: url('{% static "image/aboutus.jpeg" %}');
-    background-size: cover; /* Cover the entire section */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* No repeat */
-    color: white; /* Text color for better contrast */
-    padding: 20px;
-  }
-
-  #contact-section {
-    min-height: 100vh; /* Full viewport height */
-    background-image: url('{% static "image/Contactus.jpeg" %}');
-    background-size: cover; /* Cover the entire section */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* No repeat */
-    color: white; /* Text color for better contrast */
-    padding: 20px; /* Adjust padding as needed */
-  }
-
-  /* Additional styling for better appearance */
-  .jumbotron {
-    margin-bottom: 20px;
-  }
+      min-height: 100vh;
+      background-image: url('{% static "image/aboutus.jpeg" %}');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+      padding: 20px;
+    }
+    #contact-section {
+      min-height: 100vh;
+      background-image: url('{% static "image/Contactus.jpeg" %}');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+      padding: 20px;
+    }
   </style>
 </head>
 
@@ -61,9 +55,36 @@
     <div class="container text-center">
       <h1>Welcome to Insure Hub</h1>
       <p>Your peace of mind is our priority.</p>
-      <a href="#about-section" class="btn btn-primary btn-lg">Learn More</a>
+      <!-- What We Offer Button to trigger modal -->
+      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#offerModal">What We Offer</button>
     </div>
   </section>
+
+  <!-- Modal HTML -->
+  <div class="modal fade" id="offerModal" tabindex="-1" role="dialog" aria-labelledby="offerModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="offerModalLabel">Insurance Categories</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group">
+            <li class="list-group-item">Health Insurance</li>
+            <li class="list-group-item">Car Insurance</li>
+            <li class="list-group-item">Property Insurance</li>
+            <li class="list-group-item">Travel Insurance</li>
+            <!-- Add more categories as needed -->
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- About Us Section -->
   <section id="about-section" class="jumbotron-fluid d-flex justify-content-center align-items-center xyz-about">
@@ -77,14 +98,10 @@
 
   <!-- Contact Us Section -->
   <section id="contact-section" class="umbotron jumbotron-fluid d-flex justify-content-center align-items-center xyz-about">
-    <h3>Send Us Your Valuable Feedback</h3>
-    <form method="POST" autocomplete="off">
-      {% csrf_token %}
-      <div class="form-group">
-        {{ form.as_p }}
-        <input type="submit" value="Send Message" class="btn btn-primary btn-lg">
-      </div>
-    </form>
+    <center>
+      <h3>Send Us Your Valuable Feedback</h3>
+      <br><br><a href="{% url 'feedback' %}" class="btn btn-primary btn-lg">Send Message</a>
+    </center>
   </section>
 
   {% include "insurance/footer.html" %}

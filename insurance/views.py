@@ -246,11 +246,6 @@ def update_question_view(request,pk):
     return render(request,'insurance/update_question.html',{'questionForm':questionForm})
 
 
-
-
-
-
-
 def aboutus_view(request):
     return render(request,'insurance/aboutus.html')
 
@@ -265,3 +260,7 @@ def contactus_view(request):
             send_mail(str(name)+' || '+str(email),message,settings.EMAIL_HOST_USER, settings.EMAIL_RECEIVING_USER, fail_silently = False)
             return render(request, 'insurance/contactussuccess.html')
     return render(request, 'insurance/contactus.html', {'form':sub})
+
+
+def feedback_view(request):
+    return render(request, 'insurance/feedback.html')
