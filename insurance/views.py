@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect,reverse
+from django.urls import reverse
 from . import forms,models
 from django.db.models import Sum
 from django.contrib.auth.models import Group
@@ -11,12 +12,19 @@ from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from customer import models as CMODEL
 from customer import forms as CFORM
+from .models import Category
 
 def home_view(request):
     if request.user.is_authenticated:
-        return HttpResponseRedirect('afterlogin')  
-    return render(request,'insurance/homepg.html')
-
+        # Redirect to the 'afterlogin' URL if the user is authenticated
+        return HttpResponseRedirect(reverse('afterlogin'))
+    
+    # Retrieve all categories from the database
+    categories = Category.objects.all()
+    
+    
+    # Render the homepage with categories data
+    return render(request, 'insurance/homepg.html', {'categories': categories})
 
 def is_customer(user):
     return user.groups.filter(name='CUSTOMER').exists()

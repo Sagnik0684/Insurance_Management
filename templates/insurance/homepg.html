@@ -72,11 +72,11 @@
         </div>
         <div class="modal-body">
           <ul class="list-group">
-            <li class="list-group-item">Health Insurance</li>
-            <li class="list-group-item">Car Insurance</li>
-            <li class="list-group-item">Property Insurance</li>
-            <li class="list-group-item">Travel Insurance</li>
-            <!-- Add more categories as needed -->
+            {% for category in categories %}
+            <li class="list-group-item">{{ category.category_name }}</li>
+          {% empty %}
+            <li class="list-group-item">No categories available</li>
+          {% endfor %}
           </ul>
         </div>
         <div class="modal-footer">
