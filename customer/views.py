@@ -12,6 +12,8 @@ from insurance import models as CMODEL
 from insurance import forms as CFORM
 from django.contrib.auth.models import User
 from django.urls import reverse
+from .models import CustomerPolicy
+from .forms import CustomerPolicyForm
 
 def customerclick_view(request):
     if request.user.is_authenticated:
@@ -142,3 +144,28 @@ def premium_interest_calculator_view(request):
     return render(request, 'customer/premium_interest_calculator.html')
 
 
+@login_required
+def customer_policies_view(request):
+    policies = CustomerPolicy.objects.filter(user=request.user)
+    return render(request, 'customer/customer_policies.html', {'policies': policies})
+
+@login_required
+def add_policy_view(request):
+    if request.method == 'POST':
+        form = CustomerPolicyForm(request.POST)
+        if form.is_valid():
+            policy = form.save(commit=False)
+            policy.user = request.user  # Assign the current logged-in user to the policy
+            policy.save()
+            return redirect('customer_policies')
+    else:
+        form = CustomerPolicyForm()
+    return render(request, 'customer/add_policy.html', {'form': form})
+
+@login_required
+def delete_policy_view(request, policy_id):
+    policy = CustomerPolicy.objects.get(id=policy_id, user=request.user)
+    if request.method == 'POST':
+        policy.delete()
+        return redirect('customer_policies')
+    return render(request, 'customer/delete_policy.html', {'policy': policy})

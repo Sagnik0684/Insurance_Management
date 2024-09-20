@@ -16,4 +16,7 @@ urlpatterns = [
     path('question-history', views.question_history_view,name='question-history'),
 
     path('premium-interest-calculator/', views.premium_interest_calculator_view, name='premium-interest-calculator'),
+    path('policies/', views.customer_policies_view, name='customer_policies'),
+    path('policies/add/', views.add_policy_view, name='add_policy'),
+    path('policies/delete/<int:policy_id>/', views.delete_policy_view, name='delete_policy'),
 ]

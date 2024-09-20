@@ -16,3 +16,9 @@ class CustomerForm(forms.ModelForm):
         model=models.Customer
         fields=['address','mobile','profile_pic']
 
+from .models import CustomerPolicy
+
+class CustomerPolicyForm(forms.ModelForm):
+    class Meta:
+        model = CustomerPolicy
+        fields = ['policy_number', 'policy_name', 'provider_name', 'start_date', 'renewal_date']

@@ -1,0 +1,84 @@
+{% extends 'customer/customerbase.html' %}
+
+{% block content %}
+<style>
+    .policies-container {
+        max-width: 1000px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #343a40;
+        margin-bottom: 30px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+    }
+
+    table th, table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+        background-color: #007bff;
+        color: white;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .add-policy-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border-radius: 4px;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .add-policy-btn:hover {
+        background-color: #218838;
+    }
+</style>
+
+<div class="policies-container">
+    <h2>Your Policies</h2>
+    <table>
+        <tr>
+            <th>Policy Number</th>
+            <th>Policy Name</th>
+            <th>Provider Name</th>
+            <th>Start Date</th>
+            <th>Renewal Date</th>
+            <th>Actions</th>
+        </tr>
+        {% for policy in policies %}
+        <tr>
+            <td>{{ policy.policy_number }}</td>
+            <td>{{ policy.policy_name }}</td>
+            <td>{{ policy.provider_name }}</td>
+            <td>{{ policy.start_date }}</td>
+            <td>{{ policy.renewal_date }}</td>
+            <td>
+                <a href="{% url 'edit_policy' policy.id %}" class="edit-btn">Edit</a>
+                <a href="{% url 'delete_policy' policy.id %}" class="delete-btn">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{% url 'add_policy' %}" class="add-policy-btn">Add New Policy</a>
+</div>
+{% endblock %}
