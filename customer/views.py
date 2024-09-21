@@ -68,16 +68,42 @@ def is_customer(user):
 
 @login_required(login_url='customerlogin')
 def customer_dashboard_view(request):
-    dict={
-        'customer':models.Customer.objects.get(user_id=request.user.id),
-        'available_policy':CMODEL.Policy.objects.all().count(),
-        'applied_policy':CMODEL.PolicyRecord.objects.all().filter(customer=models.Customer.objects.get(user_id=request.user.id)).count(),
-        'total_category':CMODEL.Category.objects.all().count(),
-        'total_question':CMODEL.Question.objects.all().filter(customer=models.Customer.objects.get(user_id=request.user.id)).count(),
+    # Get the customer instance for the logged-in user
+    customer = models.Customer.objects.get(user_id=request.user.id)
 
+    # Fetch available policies
+    available_policy_count = CMODEL.Policy.objects.all().count()
+
+    # Fetch applied policies for the current customer
+    applied_policy_count = CMODEL.PolicyRecord.objects.filter(customer=customer).count()
+
+    # Fetch total categories
+    total_category_count = CMODEL.Category.objects.all().count()
+
+    # Fetch total questions asked by the current customer
+    total_question_count = CMODEL.Question.objects.filter(customer=customer).count()
+
+    # Fetch cheapest policy for each category
+    categories = CMODEL.Category.objects.all()
+    recommendations = []
+
+    for category in categories:
+        cheapest_policy = CMODEL.Policy.objects.filter(category=category).order_by('premium').first()
+        if cheapest_policy:
+            recommendations.append(cheapest_policy)
+
+    # Creating a context dictionary to pass to the template
+    dict = {
+        'customer': customer,
+        'available_policy': available_policy_count,
+        'applied_policy': applied_policy_count,
+        'total_category': total_category_count,
+        'total_question': total_question_count,
+        'recommendations': recommendations,  # Cheapest policy recommendations
     }
-    return render(request,'customer/customer_dashboard.html',context=dict)
 
+    # Render the dashboard template with the context
+    return render(request, 'customer/customer_dashboard.html', context=dict)
 def apply_policy_view(request):
     customer = models.Customer.objects.get(user_id=request.user.id)
     policies = CMODEL.Policy.objects.all()
@@ -169,3 +195,5 @@ def delete_policy_view(request, policy_id):
         policy.delete()
         return redirect('customer_policies')
     return render(request, 'customer/delete_policy.html', {'policy': policy})
+
+

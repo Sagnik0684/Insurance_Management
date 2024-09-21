@@ -1,4 +1,5 @@
 {% extends 'customer/customerbase.html' %}
+
 {% load widget_tweaks %}
 {% block content %}
 
@@ -110,11 +111,85 @@
         </div>
       </div>
 
+
+
+      <!-- Recommendations Sliding Window -->
+      <div class="recommendation-slides">
+        <h3>Cheapest Policies by Category</h3>
+        <div class="slides-container">
+            {% for policy in recommendations %}
+                <div class="slide">
+                    <h4>{{ policy.policy_name }}</h4>
+                    <p>Premium: {{ policy.premium }}</p>
+                    <p>Category: {{ policy.category.category_name }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- Style for recommendation sliding window -->
+    <style>
+        .recommendation-slides {
+            margin-top: 20px;
+            background-color: #f7f7f7;
+            padding: 20px;
+            border-radius: 8px;
+            overflow: hidden; /* Hide overflowing content to enable slide effect */
+            width: 100%; /* Adjust the width based on your layout */
+            position: relative;
+        }
+    
+        .slides-container {
+            display: flex;
+            width: 10000px; /* Large width to accommodate all slides */
+            transition: transform 0.5s ease; /* Smooth sliding effect */
+        }
+    
+        .slide {
+            min-width: 250px; /* Set a width for each slide */
+            background-color: white;
+            margin-right: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            flex: 0 0 100%; /* Each slide takes full width */
+            box-sizing: border-box; /* Include padding in width */
+        }
+    
+        .slide h4 {
+            margin-bottom: 10px;
+        }
+    </style>
+    
+    <!-- Add this script to handle the automatic sliding effect -->
+    <script>
+        $(document).ready(function() {
+            // Variable to keep track of the current slide index
+            let currentIndex = 0;
+    
+            // Number of slides
+            const totalSlides = $(".slide").length;
+    
+            // Function to move to the next slide
+            function showNextSlide() {
+                // Calculate the position of the next slide
+                currentIndex = (currentIndex + 1) % totalSlides; // Loop back to the first slide after the last one
+    
+                // Slide the container by adjusting the transform property
+                $(".slides-container").css("transform", "translateX(" + (-100 * currentIndex) + "%)");
+            }
+    
+            // Set an interval to automatically move to the next slide every 3 seconds
+            setInterval(showNextSlide, 3000);
+        });
+    </script>
+
       
     </div>
 </div>
 
 <br><br><br><br><br><br><br><br><br><br>
+
 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 

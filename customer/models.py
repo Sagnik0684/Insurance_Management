@@ -26,3 +26,4 @@ class CustomerPolicy(models.Model):
 
     def __str__(self):
         return f'{self.policy_name} ({self.policy_number})'
+    
