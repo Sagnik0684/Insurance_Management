@@ -1,6 +1,6 @@
 {% extends 'customer/customerbase.html' %}
 {% block content %}
-{%load static%}
+{% load static %}
 
 <head>
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -20,21 +20,22 @@
       margin: 100px;
     }
 
-       label #sidebar_btn {
+    label #sidebar_btn {
       z-index: 1;
       color: #fff;
       position: fixed;
       cursor: pointer;
       left: 300px;
       padding-left: 60px;
-      margin-top:15px;
+      margin-top: 15px;
       font-size: 20px;
-      
+
       transition: 0.5s;
       transition-property: color;
     }
   </style>
 </head>
+
 <br><br>
 <div class="container">
   <div class="panel panel-primary">
@@ -44,26 +45,79 @@
     <table class="table table-hover" id="dev-table">
       <thead>
         <tr>
-        <th>Serial No.</th>
+          <th>Serial No.</th>
           <th>Policy Name</th>
-
-          <th> Applied Date</th>
-          <th> Status</th>
-          
+          <th>Applied Date</th>
+          <th>Status</th>
         </tr>
       </thead>
       {% for t in policies %}
       <tr>
-        <td> {{ forloop.counter }}</td>
-        <td> {{t.Policy}}</td>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ t.Policy }}</td>
+        <td>{{ t.creation_date }}</td>
+        <td>{{ t.status }}</td>
 
-        <td>{{t.creation_date}}</td>
-        <td>{{t.status}}</td>
+        <!-- Show "Buy Now" button if the policy is approved -->
+        {% if t.status == 'Approved' %}
+        <td>
+          <button class="btn btn-success buy-policy-btn" data-policy-id="{{ t.Policy.id }}">Buy Now</button>
+        </td>
+        {% endif %}
       </tr>
       {% endfor %}
     </table>
   </div>
 </div>
 
-<br><br><br><br><br><br>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  $(document).ready(function () {
+    $('.buy-policy-btn').on('click', function () {
+      var policyId = $(this).data('policy-id');
+
+      $.ajax({
+        url: '/create_razorpay_order/' + policyId + '/',
+        method: 'GET',
+        success: function (data) {
+          var options = {
+            "key": data.razorpay_key,
+            "amount": data.amount,
+            "currency": data.currency,
+            "name": data.name,
+            "description": "Policy Payment",
+            "order_id": data.order_id,
+            "handler": function (response) {
+              // On payment success, send details to backend
+              $.ajax({
+                url: '/razorpay_payment_success/',
+                method: 'POST',
+                data: {
+                  'razorpay_payment_id': response.razorpay_payment_id,
+                  'razorpay_order_id': response.razorpay_order_id,
+                  'razorpay_signature': response.razorpay_signature,
+                  'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                success: function (data) {
+                  alert('Payment Successful!');
+                  location.reload(); // Reload page on success
+                },
+                error: function (error) {
+                  alert('Payment Failed');
+                }
+              });
+            },
+            "theme": {
+              "color": "#528FF0"
+            }
+          };
+
+          var rzp = new Razorpay(options);
+          rzp.open();
+        }
+      });
+    });
+  });
+</script>
+
 {% endblock content %}

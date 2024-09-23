@@ -6,7 +6,7 @@ from django.contrib.auth.views import LogoutView,LoginView
 from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
-
+    path('', include('customer.urls')), 
 
     path('customer/',include('customer.urls')),
     path('',views.home_view,name='home'),

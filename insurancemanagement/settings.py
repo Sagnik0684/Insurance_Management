@@ -144,3 +144,9 @@ EMAIL_HOST_PASSWORD = 'Password' # host email password required
 # otherwise you will get SMTPAuthenticationError at /contactus
 # this process is required because google blocks apps authentication by default
 EMAIL_RECEIVING_USER = ['your Email'] # email on which you will receive messages sent from website
+
+
+# settings.py
+
+RAZORPAY_KEY_ID = 'rzp_test_j9hra4FY1ZuJr8'
+RAZORPAY_KEY_SECRET = 'zs1i04fXKgL7h9FxJiY3ttTj'

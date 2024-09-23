@@ -14,6 +14,10 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from .models import CustomerPolicy
 from .forms import CustomerPolicyForm
+import razorpay
+from django.conf import settings
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 def customerclick_view(request):
     if request.user.is_authenticated:
@@ -104,12 +108,19 @@ def customer_dashboard_view(request):
 
     # Render the dashboard template with the context
     return render(request, 'customer/customer_dashboard.html', context=dict)
+
+
+# Razorpay client initialization
+client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+
+@login_required(login_url='customerlogin')
 def apply_policy_view(request):
     customer = models.Customer.objects.get(user_id=request.user.id)
     policies = CMODEL.Policy.objects.all()
-    return render(request,'customer/apply_policy.html',{'policies':policies,'customer':customer})
+    return render(request, 'customer/apply_policy.html', {'policies': policies, 'customer': customer})
 
-def apply_view(request,pk):
+@login_required(login_url='customerlogin')
+def apply_view(request, pk):
     customer = models.Customer.objects.get(user_id=request.user.id)
     policy = CMODEL.Policy.objects.get(id=pk)
     policyrecord = CMODEL.PolicyRecord()
@@ -118,10 +129,69 @@ def apply_view(request,pk):
     policyrecord.save()
     return redirect('history')
 
+# Razorpay client initialization
+client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+
+@login_required(login_url='customerlogin')
+def create_razorpay_order(request, pk):
+    try:
+        policy = CMODEL.Policy.objects.get(id=pk)
+        
+        # Create an order on Razorpay's side
+        order_amount = int(policy.premium * 100)  # Convert amount to paise (cents)
+        order_currency = 'INR'
+        order_receipt = f'order_rcptid_{pk}'
+        order_response = client.order.create(dict(amount=order_amount, currency=order_currency, receipt=order_receipt, payment_capture=1))
+
+        order_id = order_response['id']
+
+        return JsonResponse({
+            'order_id': order_id,
+            'razorpay_key': settings.RAZORPAY_KEY_ID,
+            'amount': order_amount,
+            'currency': order_currency,
+            'name': policy.policy_name,
+        })
+    except CMODEL.Policy.DoesNotExist:
+        return JsonResponse({'error': 'Policy not found'}, status=404)
+
+# Handle payment verification and success
+@csrf_exempt
+def razorpay_payment_success(request):
+    # Capture the payment response from Razorpay
+    if request.method == 'POST':
+        payment_id = request.POST.get('razorpay_payment_id')
+        order_id = request.POST.get('razorpay_order_id')
+        signature = request.POST.get('razorpay_signature')
+
+        # Verify payment signature (security)
+        try:
+            client.utility.verify_payment_signature({
+                'razorpay_order_id': order_id,
+                'razorpay_payment_id': payment_id,
+                'razorpay_signature': signature
+            })
+
+            # On success, update the policy record to 'Purchased'
+            policyrecord = CMODEL.PolicyRecord.objects.get(policy__id=order_id)
+            policyrecord.status = 'Purchased'
+            policyrecord.save()
+
+            return JsonResponse({'status': 'Payment successful'})
+
+        except razorpay.errors.SignatureVerificationError:
+            return JsonResponse({'status': 'Payment verification failed'}, status=400)
+
+    return JsonResponse({'status': 'Invalid request'}, status=400)
+
+
+
 def history_view(request):
     customer = models.Customer.objects.get(user_id=request.user.id)
     policies = CMODEL.PolicyRecord.objects.all().filter(customer=customer)
     return render(request,'customer/history.html',{'policies':policies,'customer':customer})
+
+
 
 def ask_question_view(request):
     customer = models.Customer.objects.get(user_id=request.user.id)

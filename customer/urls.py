@@ -10,6 +10,10 @@ urlpatterns = [
     path('customer-dashboard', views.customer_dashboard_view, name='customer-dashboard'),
     path('apply-policy', views.apply_policy_view,name='apply-policy'),
     path('apply/<int:pk>', views.apply_view,name='apply'),
+
+    path('create_razorpay_order/<int:pk>/', views.create_razorpay_order, name='create_razorpay_order'),
+    path('razorpay_payment_success/', views.razorpay_payment_success, name='razorpay_payment_success'),
+
     path('history', views.history_view,name='history'),
 
     path('ask-question', views.ask_question_view,name='ask-question'),
