@@ -148,5 +148,5 @@ EMAIL_RECEIVING_USER = ['your Email'] # email on which you will receive messages
 
 # settings.py
 
-RAZORPAY_KEY_ID = 'RazorPay_Key_Id'
-RAZORPAY_KEY_SECRET = 'Razorpay_SecretKey'
+RAZORPAY_KEY_ID = 'rzp_test_j9hra4FY1ZuJr8'
+RAZORPAY_KEY_SECRET = 'zs1i04fXKgL7h9FxJiY3ttTj'
