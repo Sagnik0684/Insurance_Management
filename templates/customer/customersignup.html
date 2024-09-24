@@ -4,31 +4,35 @@
   <head>
     <meta charset="utf-8">
     <style>
-        /* Add the CSS styles here */
         html, body {
-          height: 100%; /* Full height for HTML and body */
-          margin: 0; /* Remove default margin */
+          height: 100%;
+          margin: 0;
         }
 
         body {
           display: flex;
-          justify-content: center; /* Center horizontally */
-          align-items: center; /* Center vertically */
-          flex-direction: column; /* Stack content vertically */
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
         }
 
         form {
-          width: 100%; /* Full width */
-          max-width: 600px; /* Maximum width for better readability */
-          margin: 50px auto; /* Centered horizontally with margin */
+          width: 100%;
+          max-width: 600px;
+          margin: 50px auto;
         }
 
         .container {
           display: flex;
           flex-direction: column;
-          justify-content: center; /* Center vertically */
-          align-items: center; /* Center horizontally */
-          height: 100vh; /* Full viewport height */
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+
+        .error-message {
+          color: red;
+          font-size: 12px;
         }
     </style>
   </head>
@@ -39,49 +43,66 @@
       <h2 style="text-align: center;color: red;">CUSTOMER SIGNUP</h2>
       <form method="POST" autocomplete="off" enctype="multipart/form-data">
           {% csrf_token %}
+          
+          <!-- Username field with error handling -->
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="username">Username</label>
-              {% render_field userForm.username|attr:'required:true'  class="form-control" placeholder="username" %}
+              {% render_field userForm.username|attr:'required:true' class="form-control" placeholder="Username" %}
+              {% if userForm.username.errors %}
+                  <div class="error-message">{{ userForm.username.errors.0 }}</div>
+              {% endif %}
             </div>
+
+            <!-- Password field with error handling -->
             <div class="form-group col-md-6">
               <label for="inputPassword4">Password</label>
-              {% render_field userForm.password|attr:'required:true'  class="form-control" placeholder="password" %}
+              {% render_field userForm.password|attr:'required:true' class="form-control" placeholder="Password" %}
+              {% if userForm.password.errors %}
+                  <div class="error-message">{{ userForm.password.errors.0 }}</div>
+              {% endif %}
             </div>
           </div>
 
+          <!-- First Name and Last Name fields -->
           <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="first_name">First Name</label>
-                {% render_field userForm.first_name|attr:'required:true'  class="form-control" placeholder="First Name" %}
-              </div>
-              <div class="form-group col-md-6">
-                <label for="last_name">Last Name</label>
-                {% render_field userForm.last_name|attr:'required:true'  class="form-control" placeholder="Last Name" %}
-              </div>
+            <div class="form-group col-md-6">
+              <label for="first_name">First Name</label>
+              {% render_field userForm.first_name|attr:'required:true' class="form-control" placeholder="First Name" %}
             </div>
+            <div class="form-group col-md-6">
+              <label for="last_name">Last Name</label>
+              {% render_field userForm.last_name|attr:'required:true' class="form-control" placeholder="Last Name" %}
+            </div>
+          </div>
 
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label for="mobile">Mobile</label>
-                {% render_field customerForm.mobile|attr:'required:true'  class="form-control" placeholder="Mobile" %}
-              </div>
-              <div class="form-group col-md-6">
-                <label for="address">Address</label>
-                {% render_field customerForm.address|attr:'required:true'  class="form-control" placeholder="Address" %}
-              </div>
+          <!-- Mobile and Address fields with error handling -->
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="mobile">Mobile</label>
+              {% render_field customerForm.mobile|attr:'required:true' class="form-control" placeholder="Mobile" %}
+              {% if customerForm.mobile.errors %}
+                  <div class="error-message">{{ customerForm.mobile.errors.0 }}</div>
+              {% endif %}
             </div>
+            <div class="form-group col-md-6">
+              <label for="address">Address</label>
+              {% render_field customerForm.address|attr:'required:true' class="form-control" placeholder="Address" %}
+            </div>
+          </div>
 
-            <div class="form-row">
-              <div class="form-group col-md-12">
-                <label for="profile_pic">Profile Picture</label>
-                {% render_field customerForm.profile_pic|attr:'required:true' class="form-control" placeholder="" %}
-              </div>
+          <!-- Profile Picture -->
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="profile_pic">Profile Picture</label>
+              {% render_field customerForm.profile_pic|attr:'required:true' class="form-control" %}
             </div>
+          </div>
 
-            <div style ="text-align: center;">
-              <br><button type="submit" class="btn btn-primary">Sign Up</button>
-            </div>
+          <!-- Submit Button -->
+          <div style="text-align: center;">
+            <br><button type="submit" class="btn btn-primary">Sign Up</button>
+          </div>
       </form>
     </div>
   </body>

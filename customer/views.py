@@ -55,14 +55,7 @@ def customer_signup_view(request):
 
             # Redirect to account creation success page
             return redirect('account_creation_success')
-        
-        else:
-            # If form is invalid, print errors (for debugging)
-            print("User form errors: ", userForm.errors)
-            print("Customer form errors: ", customerForm.errors)
     
-    print("Rendering signup page")  # Debugging point 4
-    # Render the signup page with the forms
     return render(request, 'customer/customersignup.html', context=mydict)
 def account_creation_success_view(request):
     return render(request, 'customer/account_creation_success.html')

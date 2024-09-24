@@ -2,19 +2,60 @@ from django import forms
 from django.contrib.auth.models import User
 from . import models
 
+from django.core.exceptions import ValidationError
+import re
+from .models import Customer  # Assuming Customer is the model for customer form
+
 
 class CustomerUserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput(), min_length=8)
+    
     class Meta:
-        model=User
-        fields=['first_name','last_name','username','password']
-        widgets = {
-        'password': forms.PasswordInput()
-        }
+        model = User
+        fields = ['first_name', 'last_name', 'username', 'password']
+
+    def clean_password(self):
+        password = self.cleaned_data.get('password')
+
+        # Check if password contains at least one special character
+        if not re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
+            raise ValidationError('Password must contain at least one special character.')
+        
+        # Check if password contains both letters and numbers
+        if not re.search(r'[A-Za-z]', password) or not re.search(r'[0-9]', password):
+            raise ValidationError('Password must contain both letters and numbers.')
+
+        # Check if password length is at least 8 characters (already done with min_length)
+        if len(password) < 8:
+            raise ValidationError('Password must be at least 8 characters long.')
+
+        return password
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+
+        # Check if username is unique
+        if User.objects.filter(username=username).exists():
+            raise ValidationError('This username is already taken.')
+
+        return username
+
 
 class CustomerForm(forms.ModelForm):
+    mobile = forms.CharField(max_length=10)
+
     class Meta:
-        model=models.Customer
-        fields=['address','mobile','profile_pic']
+        model = Customer
+        fields = ['address', 'mobile', 'profile_pic']
+
+    def clean_mobile(self):
+        mobile = self.cleaned_data.get('mobile')
+
+        # Check if mobile number has exactly 10 digits
+        if not re.match(r'^\d{10}$', mobile):
+            raise ValidationError('Mobile number must be exactly 10 digits long.')
+
+        return mobile
 
 from .models import CustomerPolicy
 

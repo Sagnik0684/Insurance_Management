@@ -104,12 +104,59 @@
         </div>
 
         <div class="navbar-nav navbar-nav-right">
-          <a href="#about-section" class="nav-item nav-link">About Us</a>
-          <a href="#contact-section" class="nav-item nav-link">Contact Us</a>
+          <a href="javascript:void(0);" id="about-link" class="nav-item nav-link">About Us</a>
+          <a href="javascript:void(0);" id="contact-link" class="nav-item nav-link">Contact Us</a>
         </div>
       </div>
     </nav>
   </div>
+
+  <script>
+    // Function to check if the current page is the homepage
+    function isHomepage() {
+      const currentPath = window.location.pathname;
+      // Replace '/homepage/' with the actual URL path of your homepage
+      return currentPath === '/' || currentPath === '/homepage/';
+    }
+  
+    // Function to handle scrolling to a section on the homepage
+    function scrollToSection(sectionId) {
+      const section = document.querySelector(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  
+    // Event listener for About Us link
+    document.getElementById('about-link').addEventListener('click', function() {
+      if (!isHomepage()) {
+        // Redirect to homepage with the #about-section
+        window.location.href = '/#about-section';
+      } else {
+        // If already on homepage, scroll to the About Us section
+        scrollToSection('#about-section');
+      }
+    });
+  
+    // Event listener for Contact Us link
+    document.getElementById('contact-link').addEventListener('click', function() {
+      if (!isHomepage()) {
+        // Redirect to homepage with the #contact-section
+        window.location.href = '/#contact-section';
+      } else {
+        // If already on homepage, scroll to the Contact Us section
+        scrollToSection('#contact-section');
+      }
+    });
+  
+    // On page load, scroll to the section if there's a hash in the URL
+    window.onload = function() {
+      const hash = window.location.hash;
+      if (hash) {
+        scrollToSection(hash);
+      }
+    };
+  </script>
 
 </body>
 
