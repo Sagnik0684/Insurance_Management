@@ -89,6 +89,21 @@ def customer_dashboard_view(request):
         if cheapest_policy:
             recommendations.append(cheapest_policy)
 
+    # Fetch policies and check if any are expiring in the next month
+    today = date.today()
+    upcoming_expirations = []
+    policy_records = CMODEL.PolicyRecord.objects.filter(customer=customer)
+
+    for record in policy_records:
+        if record.policy.renewal_date and (record.policy.renewal_date - today).days <= 30:
+            upcoming_expirations.append(record.policy)
+
+    # If there are upcoming expirations, display notifications
+    if upcoming_expirations:
+        notification_message = "You have policies expiring soon!"
+    else:
+        notification_message = None
+
     # Creating a context dictionary to pass to the template
     dict = {
         'customer': customer,
@@ -97,6 +112,8 @@ def customer_dashboard_view(request):
         'total_category': total_category_count,
         'total_question': total_question_count,
         'recommendations': recommendations,  # Cheapest policy recommendations
+        'upcoming_expirations': upcoming_expirations,  # Policies expiring soon
+        'notification_message': notification_message,  # Notification for expiring policies
     }
 
     # Render the dashboard template with the context

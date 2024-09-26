@@ -59,7 +59,14 @@ class CustomerForm(forms.ModelForm):
 
 from .models import CustomerPolicy
 
+from django import forms
+from .models import CustomerPolicy
+
 class CustomerPolicyForm(forms.ModelForm):
     class Meta:
         model = CustomerPolicy
         fields = ['policy_number', 'policy_name', 'provider_name', 'start_date', 'renewal_date']
+        widgets = {
+            'start_date': forms.TextInput(attrs={'placeholder': 'dd/mm/yyyy', 'type': 'date'}),
+            'renewal_date': forms.TextInput(attrs={'placeholder': 'dd/mm/yyyy', 'type': 'date'}),
+        }
