@@ -1,0 +1,70 @@
+{
+    "intents": [
+      {
+        "tag": "greeting",
+        "patterns": ["Hi", "Hello", "Is anyone there?", "Good day", "Hey", "Hola"],
+        "responses": ["Hello! How can I assist you with your insurance today?", "Hi there! How can I help you?", "Hello! Need assistance with your policies?"],
+        "context": [""]
+      },
+      {
+        "tag": "goodbye",
+        "patterns": ["Bye", "Goodbye", "See you later", "Thanks, bye", "Talk to you later"],
+        "responses": ["Goodbye! Feel free to reach out again if you need assistance.", "Take care! Come back anytime you have more questions.", "Bye! Hope I could help with your insurance needs."],
+        "context": [""]
+      },
+      {
+        "tag": "thanks",
+        "patterns": ["Thanks", "Thank you", "Much appreciated", "Thank you so much", "That's helpful"],
+        "responses": ["You're welcome!", "Happy to help!", "Glad I could assist!"],
+        "context": [""]
+      },
+      {
+        "tag": "policy_inquiry",
+        "patterns": ["What are my current policies?", "Show me my policies", "What policies do I have?", "Can I see my insurance policies?"],
+        "responses": ["You can view your policies by logging into your account. Would you like me to guide you?", "You have health, motor, and property insurance. Would you like more details?"],
+        "context": [""]
+      },
+      {
+        "tag": "claim_status",
+        "patterns": ["What's the status of my claim?", "Can I check my claim?", "Is my claim approved?", "How's my insurance claim doing?"],
+        "responses": ["You can check your claim status from your dashboard. Do you need help accessing it?", "Your claim is currently being processed. We'll notify you once it's approved."],
+        "context": [""]
+      },
+      {
+        "tag": "policy_types",
+        "patterns": ["What types of insurance do you offer?", "What are your insurance options?", "Can I get health insurance?", "Do you provide car insurance?"],
+        "responses": ["We offer various insurance policies, including health, motor, life, and property insurance. Which one are you interested in?"],
+        "context": [""]
+      },
+      {
+        "tag": "registration_help",
+        "patterns": ["How can I register?", "I need help signing up", "Can you guide me through registration?", "I want to create an account"],
+        "responses": ["You can register through our website by clicking the 'Register' button. "],
+        "context": [""]
+      },
+      {
+        "tag": "login_help",
+        "patterns": ["I can't log in", "Forgot my password", "How do I log into my account?", "Login issues"],
+        "responses": ["If you've forgotten your password, you can reset it using the 'Forgot Password' link. Can I help with something else?"],
+        "context": [""]
+      },
+      {
+        "tag": "payment_methods",
+        "patterns": ["What payment methods do you accept?", "How can I pay my premium?", "Can I pay online?", "What are my payment options?"],
+        "responses": ["You can pay your premiums online using credit card, debit card, or UPI. Let me know if you need help making a payment."],
+        "context": [""]
+      },
+      {
+        "tag": "contact_support",
+        "patterns": ["I need to contact support", "How do I get customer service?", "I need help from customer service", "Can I speak with a representative?"],
+        "responses": ["You can reach our support team at by clicking on contact us button. How else can I assist you?"],
+        "context": [""]
+      },
+      {
+        "tag": "policy_recommendations",
+        "patterns": ["What insurance should I get?", "Can you recommend a policy?", "What policies do you suggest?", "I need help choosing a policy"],
+        "responses": ["Based on your profile, we recommend looking into our health and motor insurance policies. Would you like more details on them?"],
+        "context": [""]
+      }
+    ]
+  }

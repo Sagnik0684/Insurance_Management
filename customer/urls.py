@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from django.contrib.auth.views import LoginView
+from .views import chatbot_response
 
 urlpatterns = [
     path('customerclick', views.customerclick_view, name='customerclick'),
@@ -24,5 +25,5 @@ urlpatterns = [
     path('policies/add/', views.add_policy_view, name='add_policy'),
     path('policies/delete/<int:policy_id>/', views.delete_policy_view, name='delete_policy'),
 
-    
+    path('chatbot/', chatbot_response, name='chatbot_response'),
 ]

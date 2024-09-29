@@ -70,3 +70,7 @@ class CustomerPolicyForm(forms.ModelForm):
             'start_date': forms.TextInput(attrs={'placeholder': 'dd/mm/yyyy', 'type': 'date'}),
             'renewal_date': forms.TextInput(attrs={'placeholder': 'dd/mm/yyyy', 'type': 'date'}),
         }
+
+
+class ChatbotForm(forms.Form):
+    message = forms.CharField(max_length=200,widget=forms.TextInput(attrs={'placeholder': 'Type your message...'}))

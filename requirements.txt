@@ -7,3 +7,8 @@ Pillow
 Django
 setuptools
 razorpay
+tensorflow
+keras
+nltk
+numpy
+scikit-learn

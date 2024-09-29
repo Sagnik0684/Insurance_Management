@@ -89,21 +89,6 @@ def customer_dashboard_view(request):
         if cheapest_policy:
             recommendations.append(cheapest_policy)
 
-    # Fetch policies and check if any are expiring in the next month
-    today = date.today()
-    upcoming_expirations = []
-    policy_records = CMODEL.PolicyRecord.objects.filter(customer=customer)
-
-    for record in policy_records:
-        if record.policy.renewal_date and (record.policy.renewal_date - today).days <= 30:
-            upcoming_expirations.append(record.policy)
-
-    # If there are upcoming expirations, display notifications
-    if upcoming_expirations:
-        notification_message = "You have policies expiring soon!"
-    else:
-        notification_message = None
-
     # Creating a context dictionary to pass to the template
     dict = {
         'customer': customer,
@@ -112,8 +97,6 @@ def customer_dashboard_view(request):
         'total_category': total_category_count,
         'total_question': total_question_count,
         'recommendations': recommendations,  # Cheapest policy recommendations
-        'upcoming_expirations': upcoming_expirations,  # Policies expiring soon
-        'notification_message': notification_message,  # Notification for expiring policies
     }
 
     # Render the dashboard template with the context
@@ -193,7 +176,6 @@ def razorpay_payment_success(request):
             return JsonResponse({'status': 'Payment verification failed'}, status=400)
 
     return JsonResponse({'status': 'Invalid request'}, status=400)
-
 
 
 def history_view(request):
@@ -277,3 +259,64 @@ def delete_policy_view(request, policy_id):
     return render(request, 'customer/delete_policy.html', {'policy': policy})
 
 
+import json
+import random
+import numpy as np
+import nltk
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from keras.models import load_model
+import pickle
+
+# Load the model and other necessary files
+model = load_model('customer/chatbot/chatbot_model.h5')  # Adjust the path as needed
+words = pickle.load(open('customer/chatbot/words.pkl', 'rb'))
+classes = pickle.load(open('customer/chatbot/classes.pkl', 'rb'))
+
+# Function to process user input and generate chatbot response
+@csrf_exempt  # Skip CSRF token for POST requests
+def chatbot_response(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        user_message = data.get('message')
+
+        # Preprocessing user input, prediction, and response generation
+        def clean_up_sentence(sentence):
+            sentence_words = nltk.word_tokenize(sentence)
+            sentence_words = [word.lower() for word in sentence_words]
+            return sentence_words
+
+        def bag_of_words(sentence, words):
+            sentence_words = clean_up_sentence(sentence)
+            bag = [0] * len(words)
+            for s in sentence_words:
+                for i, w in enumerate(words):
+                    if w == s:
+                        bag[i] = 1
+            return np.array(bag)
+
+        def predict_class(sentence, model):
+            bow = bag_of_words(sentence, words)
+            res = model.predict(np.array([bow]))[0]
+            ERROR_THRESHOLD = 0.25
+            results = [[i, r] for i, r in enumerate(res) if r > ERROR_THRESHOLD]
+
+            # Sort by strength of probability
+            results.sort(key=lambda x: x[1], reverse=True)
+            return_list = []
+            for r in results:
+                return_list.append({"intent": classes[r[0]], "probability": str(r[1])})
+            return return_list
+
+        def get_response(intents_list):
+            intents = json.load(open('customer/chatbot/intents.json'))  # Load your intents
+            tag = intents_list[0]['intent']
+            for intent in intents['intents']:
+                if intent['tag'] == tag:
+                    return random.choice(intent['responses'])
+
+        # Predict class and generate response
+        intents_list = predict_class(user_message, model)
+        response = get_response(intents_list)
+
+        return JsonResponse({"reply": response})
