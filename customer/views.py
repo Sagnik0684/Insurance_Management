@@ -89,6 +89,17 @@ def customer_dashboard_view(request):
         if cheapest_policy:
             recommendations.append(cheapest_policy)
 
+    # Expiring policies logic
+    def get_expiring_policies(user):
+        today = timezone.now().date()
+        expiry_threshold = today + timedelta(days=30)
+        expiring_policies = CustomerPolicy.objects.filter(user=user, renewal_date__lte=expiry_threshold, renewal_date__gte=today)
+        return expiring_policies
+
+    # Fetch all customer policies
+    policies = CustomerPolicy.objects.filter(user=request.user)
+    expiring_policies = get_expiring_policies(request.user)
+
     # Creating a context dictionary to pass to the template
     dict = {
         'customer': customer,
@@ -97,6 +108,8 @@ def customer_dashboard_view(request):
         'total_category': total_category_count,
         'total_question': total_question_count,
         'recommendations': recommendations,  # Cheapest policy recommendations
+        'policies': policies,                 # All policies of the customer
+        'expiring_policies': expiring_policies,  # Policies expiring within 30 days
     }
 
     # Render the dashboard template with the context
@@ -257,6 +270,17 @@ def delete_policy_view(request, policy_id):
         policy.delete()
         return redirect('customer_policies')
     return render(request, 'customer/delete_policy.html', {'policy': policy})
+
+
+
+from django.utils import timezone
+from datetime import timedelta
+
+def get_expiring_policies(user):
+    today = timezone.now().date()
+    expiry_threshold = today + timedelta(days=30)
+    expiring_policies = CustomerPolicy.objects.filter(user=user, renewal_date__lte=expiry_threshold, renewal_date__gte=today)
+    return expiring_policies
 
 
 import json

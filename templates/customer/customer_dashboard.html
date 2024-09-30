@@ -98,7 +98,7 @@
     padding: 10px; /* Padding inside the chatbox */
     background-color: #f9f9f9; /* Light background for the chatbox */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    background-image: url('/static/image/background.png');
+    background-image: url('/static/image/backgroundai.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -188,18 +188,67 @@
         
     </style>
 </head>
+    <!--Policy Notifications-->
 
-
-{% if notification_message %}
-    <div class="alert alert-warning">
-        {{ notification_message }}
-    </div>
+{% if expiring_policies %}
+<div class="notification" id="expiring-policies-notification">
+  <button class="close-btn" onclick="dismissNotification()">X</button>
+    <h3>Expiring Policies</h3>
     <ul>
-        {% for policy in upcoming_expirations %}
-            <li>{{ policy.policy_name }} is expiring on {{ policy.renewal_date }}.</li>
+        {% for policy in expiring_policies %}
+        <li>{{ policy.policy_name }} is expiring on {{ policy.renewal_date }}</li>
         {% endfor %}
     </ul>
+</div>
 {% endif %}
+<!--Policy Notifications-->
+
+
+<style> /*Notification CSS*/
+  .notification {
+    position:relative;
+    background-color: #ffdddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-left: 6px solid #f44336;
+}
+
+.notification h3 {
+    margin-top: 0;
+    font-size: 16px;
+}
+
+.notification ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+.notification li {
+    margin: 5px 0;
+}
+.close-btn {
+  background-color: transparent;  /* Transparent background */
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: #721c24;  /* Text color */
+    cursor: pointer;
+    position: absolute;
+    right: 10px;  /* Align to the right side */
+    top: 10px;    /* Keep it at the top */;
+}
+.close-btn:hover{
+  color:#d9534f;
+  background-color: transparent;
+}
+
+</style>
+
+<script> //Notification Dismissal
+  function dismissNotification() {
+      var notification = document.getElementById('expiring-policies-notification');
+      notification.style.display = 'none';
+  }
+</script>
 
 
 

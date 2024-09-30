@@ -67,8 +67,8 @@ class CustomerPolicyForm(forms.ModelForm):
         model = CustomerPolicy
         fields = ['policy_number', 'policy_name', 'provider_name', 'start_date', 'renewal_date']
         widgets = {
-            'start_date': forms.TextInput(attrs={'placeholder': 'dd/mm/yyyy', 'type': 'date'}),
-            'renewal_date': forms.TextInput(attrs={'placeholder': 'dd/mm/yyyy', 'type': 'date'}),
+            'start_date': forms.TextInput(attrs={'placeholder': 'mm/dd/yyyy', 'type': 'date'}),
+            'renewal_date': forms.TextInput(attrs={'placeholder': 'mm/dd/yyyy', 'type': 'date'}),
         }
 
 
