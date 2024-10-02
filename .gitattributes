@@ -1,2 +1,13 @@
-# Auto detect text files and perform LF normalization
+# Set default behavior to automatically normalize line endings.
 * text=auto
+
+# Windows-style for batch files
+*.bat text eol=crlf
+
+# Unix-style for shell scripts
+*.sh text eol=lf
+
+# Ensure JSON, Python, and other text files use LF
+*.py text eol=lf
+*.json text eol=lf
+*.txt text eol=lf

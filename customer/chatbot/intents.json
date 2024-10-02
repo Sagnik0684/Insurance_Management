@@ -1,70 +1,436 @@
 {
-    "intents": [
-      {
-        "tag": "greeting",
-        "patterns": ["Hi", "Hello", "Is anyone there?", "Good day", "Hey", "Hola"],
-        "responses": ["Hello! How can I assist you with your insurance today?", "Hi there! How can I help you?", "Hello! Need assistance with your policies?"],
-        "context": [""]
-      },
-      {
-        "tag": "goodbye",
-        "patterns": ["Bye", "Goodbye", "See you later", "Thanks, bye", "Talk to you later"],
-        "responses": ["Goodbye! Feel free to reach out again if you need assistance.", "Take care! Come back anytime you have more questions.", "Bye! Hope I could help with your insurance needs."],
-        "context": [""]
-      },
-      {
-        "tag": "thanks",
-        "patterns": ["Thanks", "Thank you", "Much appreciated", "Thank you so much", "That's helpful"],
-        "responses": ["You're welcome!", "Happy to help!", "Glad I could assist!"],
-        "context": [""]
-      },
-      {
-        "tag": "policy_inquiry",
-        "patterns": ["What are my current policies?", "Show me my policies", "What policies do I have?", "Can I see my insurance policies?"],
-        "responses": ["You can view your policies by logging into your account. Would you like me to guide you?", "You have health, motor, and property insurance. Would you like more details?"],
-        "context": [""]
-      },
-      {
-        "tag": "claim_status",
-        "patterns": ["What's the status of my claim?", "Can I check my claim?", "Is my claim approved?", "How's my insurance claim doing?"],
-        "responses": ["You can check your claim status from your dashboard. Do you need help accessing it?", "Your claim is currently being processed. We'll notify you once it's approved."],
-        "context": [""]
-      },
-      {
-        "tag": "policy_types",
-        "patterns": ["What types of insurance do you offer?", "What are your insurance options?", "Can I get health insurance?", "Do you provide car insurance?"],
-        "responses": ["We offer various insurance policies, including health, motor, life, and property insurance. Which one are you interested in?"],
-        "context": [""]
-      },
-      {
-        "tag": "registration_help",
-        "patterns": ["How can I register?", "I need help signing up", "Can you guide me through registration?", "I want to create an account"],
-        "responses": ["You can register through our website by clicking the 'Register' button. "],
-        "context": [""]
-      },
-      {
-        "tag": "login_help",
-        "patterns": ["I can't log in", "Forgot my password", "How do I log into my account?", "Login issues"],
-        "responses": ["If you've forgotten your password, you can reset it using the 'Forgot Password' link. Can I help with something else?"],
-        "context": [""]
-      },
-      {
-        "tag": "payment_methods",
-        "patterns": ["What payment methods do you accept?", "How can I pay my premium?", "Can I pay online?", "What are my payment options?"],
-        "responses": ["You can pay your premiums online using credit card, debit card, or UPI. Let me know if you need help making a payment."],
-        "context": [""]
-      },
-      {
-        "tag": "contact_support",
-        "patterns": ["I need to contact support", "How do I get customer service?", "I need help from customer service", "Can I speak with a representative?"],
-        "responses": ["You can reach our support team at by clicking on contact us button. How else can I assist you?"],
-        "context": [""]
-      },
-      {
-        "tag": "policy_recommendations",
-        "patterns": ["What insurance should I get?", "Can you recommend a policy?", "What policies do you suggest?", "I need help choosing a policy"],
-        "responses": ["Based on your profile, we recommend looking into our health and motor insurance policies. Would you like more details on them?"],
-        "context": [""]
-      }
-    ]
-  }
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": ["Hi", "Hello", "Is anyone there?", "Good day", "Hey", "Hola", "Hi there!", "Greetings"],
+      "responses": ["Hello! How can I assist you with your insurance today?", "Hi there! How can I help you with your insurance needs?", "Hello! Need assistance with your insurance policies or claims?"],
+      "context": [""]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": ["Bye", "Goodbye", "See you later", "Thanks, bye", "Talk to you later", "Catch you later", "See ya!"],
+      "responses": ["Goodbye! Feel free to reach out again if you need assistance.", "Take care! Come back anytime you have more questions or need help with insurance.", "Bye! Hope I could help with your insurance needs. Have a great day!"],
+      "context": [""]
+    },
+    {
+      "tag": "thanks",
+      "patterns": ["Thanks", "Thank you", "Much appreciated", "Thank you so much", "That's helpful", "Thanks a lot", "Thanks for your help"],
+      "responses": ["You're welcome!", "Happy to help!", "Glad I could assist! If you have more questions, feel free to ask.", "You're welcome! Let me know if you need further assistance."],
+      "context": [""]
+    },
+    {
+      "tag": "policy_inquiry",
+      "patterns": ["What are my current policies?", "Show me my policies", "What policies do I have?", "Can I see my insurance policies?", "I need to view my insurance policies", "What policies am I enrolled in?"],
+      "responses": ["You can view your policies by logging into your account. Would you like me to guide you?", "You currently have health, motor, and property insurance. Would you like more details on a specific one?", "Please log into your dashboard to view detailed information about your policies."],
+      "context": [""]
+    },
+    {
+      "tag": "claim_status",
+      "patterns": ["What's the status of my claim?", "Can I check my claim?", "Is my claim approved?", "How's my insurance claim doing?", "Can you update me on my claim?", "Check my claim status"],
+      "responses": ["You can check your claim status from your dashboard. Do you need help accessing it?", "Your claim is currently being processed. We'll notify you once it's approved.", "You can track the claim status in real time by logging into your account."],
+      "context": [""]
+    },
+    {
+      "tag": "policy_types",
+      "patterns": ["What types of insurance do you offer?", "What are your insurance options?", "Can I get health insurance?", "Do you provide car insurance?", "What are your available insurance plans?", "What policies can I buy?", "What insurance products are available?"],
+      "responses": ["We offer various insurance policies, including health, motor, life, and property insurance. Which one are you interested in?", "Our insurance options include health, auto, life, and home insurance. Would you like more information on any of these?", "We provide a variety of insurance plans such as life, health, motor, and travel insurance. Let me know which one you’re looking for."],
+      "context": [""]
+    },
+    {
+      "tag": "registration_help",
+      "patterns": ["How can I register?", "I need help signing up", "Can you guide me through registration?", "I want to create an account", "How do I sign up for an account?", "I want to register for your service"],
+      "responses": ["You can register through our website by clicking the 'Register' button. If you need any assistance, I can guide you through the process.", "To create an account, visit our website and click 'Sign up'. Let me know if you need help along the way."],
+      "context": [""]
+    },
+    {
+      "tag": "login_help",
+      "patterns": ["I can't log in", "Forgot my password", "How do I log into my account?", "Login issues", "Help me with logging in", "I can't access my account", "How do I recover my password?"],
+      "responses": ["If you've forgotten your password, you can reset it using the 'Forgot Password' link. Can I help with something else?", "If you're having trouble logging in, try resetting your password or contact our support for further help."],
+      "context": [""]
+    },
+    {
+      "tag": "payment_methods",
+      "patterns": ["What payment methods do you accept?", "How can I pay my premium?", "Can I pay online?", "What are my payment options?", "Do you accept card payments?", "How can I make a payment?", "What methods of payment can I use?"],
+      "responses": ["You can pay your premiums online using credit card, debit card, net banking, or UPI. Let me know if you need help making a payment.", "We accept credit cards, debit cards, and UPI for premium payments. You can also set up automatic payments."],
+      "context": [""]
+    },
+    {
+      "tag": "contact_support",
+      "patterns": ["I need to contact support", "How do I get customer service?", "I need help from customer service", "Can I speak with a representative?", "How do I contact your support team?", "Where can I find customer service?", "I need to talk to someone from support"],
+      "responses": ["You can reach our support team by clicking on the 'Contact Us' button or call our toll-free number. How else can I assist you?", "Feel free to contact our support team via live chat or email, whichever is convenient for you."],
+      "context": [""]
+    },
+    {
+      "tag": "policy_recommendations",
+      "patterns": ["What insurance should I get?", "Can you recommend a policy?", "What policies do you suggest?", "I need help choosing a policy", "Can you recommend an insurance plan?", "What’s the best policy for me?", "Which insurance do I need?"],
+      "responses": ["Based on your profile, we recommend looking into our health and motor insurance policies. Would you like more details on them?", "For your needs, our life and property insurance could be a great fit. Would you like more information?", "We suggest exploring health and life insurance options for comprehensive coverage. Can I provide more details on these plans?"],
+      "context": [""]
+    },
+    {
+      "tag": "claim_filing",
+      "patterns": ["How do I file a claim?", "Can I submit a claim online?", "What's the process for filing a claim?", "How do I submit an insurance claim?", "I need to file a claim", "What’s the process to report a claim?"],
+      "responses": ["To file a claim, log into your account and click on 'Submit a Claim'. If you need help, I can walk you through the process.", "You can file a claim online or by contacting our support team. Let me know if you’d like more details on the steps."],
+      "context": [""]
+    },
+    {
+      "tag": "policy_cancellation",
+      "patterns": ["How do I cancel my policy?", "I want to cancel my insurance", "Can I cancel my policy?", "How do I stop my insurance policy?", "What is the process to cancel my policy?", "I need to cancel my coverage"],
+      "responses": ["To cancel your policy, please log into your account and select 'Cancel Policy' or contact our support team for further assistance.", "You can initiate a policy cancellation from your account dashboard or by calling our support team. Would you like help with this?"],
+      "context": [""]
+    },
+    {
+      "tag": "policy_renewal",
+      "patterns": ["How do I renew my policy?", "Can I renew my insurance online?", "I want to renew my insurance", "What's the process to renew my policy?", "Can you help me with policy renewal?", "How do I extend my insurance coverage?"],
+      "responses": ["You can renew your policy through your account dashboard under the 'Renewal' section. Need help with the renewal process?", "Renewing your policy is easy! Log into your account and click on the 'Renew' button for the specific policy."],
+      "context": [""]
+    },
+    {
+      "tag": "discount_inquiry",
+      "patterns": ["Do you offer any discounts?", "Can I get a discount on my insurance?", "Are there any promotions?", "What discounts do you provide?", "Do you have any special offers?", "How can I qualify for a discount?"],
+      "responses": ["We offer various discounts based on factors like policy bundling or no-claim bonuses. Would you like more information on available discounts?", "You can qualify for discounts if you bundle multiple policies or maintain a claim-free record. Can I give you more details?"],
+      "context": [""]
+    },
+    {
+      "tag": "claim_rejection_reason",
+      "patterns": ["Why was my claim rejected?", "Reason for claim denial", "Why did my claim get rejected?", "Claim denial reason", "My claim was denied, why?"],
+      "responses": ["Your claim may have been rejected due to incomplete documentation or policy exclusions. Please check your claim details or contact support for a specific reason."],
+      "context": [""]
+    },
+    {
+      "tag": "claim_reopen",
+      "patterns": ["Can I reopen my claim?", "Reopen claim", "I want to reopen a denied claim", "How do I reopen a closed claim?"],
+      "responses": ["You can reopen a claim by contacting our support team. Please ensure you have all necessary documentation before reopening the claim."],
+      "context": [""]
+    },
+    {
+      "tag": "claim_documentation",
+      "patterns": ["What documents do I need for my claim?", "Required documents for claim", "Claim paperwork", "What paperwork do I need for an insurance claim?", "What should I submit for my claim?"],
+      "responses": ["For most claims, you'll need a claim form, proof of loss, and supporting documents like invoices or medical reports. Please check your policy for specific documentation requirements."],
+      "context": [""]
+    },
+    {
+      "tag": "claim_deadline",
+      "patterns": ["Is there a deadline for filing a claim?", "Claim submission deadline", "How long do I have to file a claim?", "What is the claim filing deadline?", "When should I submit my claim?"],
+      "responses": ["Claims must be filed within the time frame specified in your policy. Typically, this ranges from 30 to 90 days after the incident. Please check your policy for specific details."],
+      "context": [""]
+    },
+    {
+      "tag": "policy_change_request",
+      "patterns": ["How can I change my policy?", "Change insurance policy details", "Can I update my policy?", "I need to modify my insurance coverage", "Update my policy"],
+      "responses": ["You can request a policy change by logging into your account and selecting the 'Policy Update' option. If you need assistance, feel free to reach out to customer service."],
+      "context": [""]
+    },
+    {
+      "tag": "policy_coverage_limits",
+      "patterns": ["What are my coverage limits?", "How much does my insurance cover?", "Can I check my policy limits?", "What is the maximum coverage I have?", "How much coverage do I get under my policy?"],
+      "responses": ["Your policy limits depend on the specific type of insurance you have. You can view the coverage limits in your account under 'Policy Details'."],
+      "context": [""]
+    },
+    {
+      "tag": "policy_deductible",
+      "patterns": ["What is my deductible?", "How much is my deductible?", "What is the deductible amount for my policy?", "Can I check my deductible?", "What deductible am I paying?"],
+      "responses": ["Your deductible amount depends on the policy you selected. You can view it in your policy documents or your account dashboard under 'Policy Summary'."],
+      "context": [""]
+    },
+    {
+      "tag": "policy_exclusions",
+      "patterns": ["What does my policy not cover?", "What are the exclusions in my insurance?", "What is not included in my policy?", "Can you explain policy exclusions?", "What are the exclusions in my insurance plan?"],
+      "responses": ["Policy exclusions vary depending on the type of insurance. Please review your policy document or log into your account to check the list of exclusions for your coverage."],
+      "context": [""]
+    },
+    {
+      "tag": "policy_premium_increase",
+      "patterns": ["Why did my premium increase?", "Reason for premium hike", "Why is my premium higher?", "What caused my premium to go up?", "Why did my insurance rate increase?"],
+      "responses": ["Your premium may have increased due to factors like changes in coverage, age, claims history, or inflation. Please review your policy or contact customer support for specific details."],
+      "context": [""]
+    },
+    {
+      "tag": "policy_premium_due_date",
+      "patterns": ["When is my premium due?", "Premium payment deadline", "What is the due date for my premium?", "When should I pay my premium?", "Premium due date"],
+      "responses": ["Your premium due date can be found in your account under the 'Billing' section or on your policy documents. Make sure to pay by the due date to avoid lapses in coverage."],
+      "context": [""]
+    },
+    {
+      "tag": "policy_premium_discount",
+      "patterns": ["How can I get a discount on my premium?", "Premium discount eligibility", "Can I qualify for a premium discount?", "Ways to lower premium", "How do I get a lower premium rate?"],
+      "responses": ["You can lower your premium by qualifying for discounts, such as bundling policies or maintaining a claim-free record. Please check your account or contact support to see if you qualify."],
+      "context": [""]
+    },
+    {
+      "tag": "policy_grace_period",
+      "patterns": ["What is the grace period for my premium?", "How long do I have to pay after the due date?", "Is there a grace period for premium payment?", "Can I still pay after the due date?", "What happens if I miss the premium due date?"],
+      "responses": ["Most policies offer a grace period of 15 to 30 days after the premium due date. Please check your policy document for specific details regarding your grace period."],
+      "context": [""]
+    },
+    {
+      "tag": "multi_policy_discount",
+      "patterns": ["Do you offer multi-policy discounts?", "Discount for multiple policies", "Can I get a discount for buying more than one policy?", "Is there a bundle discount?", "Can I save money by combining policies?"],
+      "responses": ["Yes, we offer discounts if you bundle multiple policies, such as home and auto insurance. Contact us or check your account for more information on available multi-policy discounts."],
+      "context": [""]
+    },
+    {
+      "tag": "insurance_renewal_reminder",
+      "patterns": ["Can I set a renewal reminder?", "How do I get reminded to renew?", "I need a reminder for policy renewal", "Can you notify me when my insurance is due for renewal?", "Can I get a renewal alert?"],
+      "responses": ["Yes, you can set up renewal reminders through your account settings. We also send email and SMS notifications prior to your policy renewal date."],
+      "context": [""]
+    },
+    {
+      "tag": "policy_termination_refund",
+      "patterns": ["Will I get a refund if I cancel my policy?", "Refund on policy cancellation", "Do I get money back for cancelling my insurance?", "Can I get a refund after cancelling my insurance?", "Refund policy for insurance cancellation"],
+      "responses": ["Refunds for policy cancellations depend on the terms of your policy. You may be eligible for a prorated refund if you cancel within the allowable period. Please check your policy details or contact support."],
+      "context": [""]
+    },
+    {
+      "tag": "claim_processing_time",
+      "patterns": ["How long does it take to process a claim?", "Claim processing time", "When will my claim be processed?", "How long does it take to approve a claim?", "Expected claim processing time"],
+      "responses": ["Claims typically take 7-14 business days to process, depending on the complexity. Please check your account for real-time updates on your claim."],
+      "context": [""]
+    },
+    {
+      "tag": "policy_upgrade_options",
+      "patterns": ["Can I upgrade my policy?", "How do I upgrade my insurance?", "Policy upgrade options", "I want to increase my coverage", "Can I change my policy to a higher plan?"],
+      "responses": ["You can upgrade your policy through your account under the 'Upgrade' section or by contacting our support team for assistance with upgrading your coverage."],
+      "context": [""]
+    },
+    {
+      "tag": "mobile_app_download",
+      "patterns": ["How can I download your mobile app?", "Is there an app for your service?", "Where do I download your app?", "Do you have a mobile app?", "Can I access my policy on your app?"],
+      "responses": ["Yes, you can download our mobile app from the App Store or Google Play. The app allows you to manage your policies, file claims, and make payments on the go."],
+      "context": [""]
+    },
+    {
+      "tag": "claim_help",
+      "patterns": ["I need help filing a claim", "How do I submit my claim?", "Can you assist with my claim?", "I need assistance with a claim", "Help me file an insurance claim"],
+      "responses": ["To file a claim, log into your account and follow the steps under 'Submit a Claim'. If you need further help, feel free to contact our support team."],
+      "context": [""]
+    },
+    {
+      "tag": "claim_tracking",
+      "patterns": ["How do I track my claim?", "Claim status tracking", "Can I follow up on my claim?", "Where can I see my claim progress?", "Track my insurance claim"],
+      "responses": ["You can track your claim status in real time by logging into your account and going to the 'Claims' section. You will see the current status and expected processing time."],
+      "context": [""]
+    },
+    {
+      "tag": "emergency_contact",
+      "patterns": ["What is your emergency contact number?", "Emergency contact for insurance help", "Who do I call in an emergency?", "Insurance emergency contact", "Can I call in case of emergency?"],
+      "responses": ["For emergencies, please call our 24/7 emergency support number listed in your policy documents or on our website."],
+      "context": [""]
+    },
+    {
+      "tag": "policy_expiration_warning",
+      "patterns": ["When does my policy expire?", "Is my insurance about to expire?", "When does my coverage end?", "Policy expiration date", "Can I check when my policy expires?"],
+      "responses": ["You can view the expiration date of your policy in your account under 'Policy Details'. Make sure to renew before the expiration to avoid any lapse in coverage."],
+      "context": [""]
+    },
+    {
+      "tag": "policy_copy_request",
+      "patterns": ["Can I get a copy of my policy?", "Request policy copy", "How do I get a digital copy of my insurance?", "Can you send me a copy of my policy?", "I need a copy of my insurance document"],
+      "responses": ["You can download a copy of your policy document by logging into your account and selecting 'Download Policy'. If you need a physical copy, please contact customer service."],
+      "context": [""]
+    },
+    {
+      "tag": "nominee_update",
+      "patterns": ["How do I change my nominee?", "Can I update my nominee details?", "Nominee update process", "I need to change the nominee on my policy", "How can I modify my nominee information?"],
+      "responses": ["You can update your nominee details by logging into your account and selecting 'Edit Nominee'. If you need assistance, our support team is available to help."],
+      "context": [""]
+    },
+    {
+      "tag": "tax_certificate",
+      "patterns": ["Can I get a tax certificate?", "I need my tax certificate for insurance", "How do I get a tax certificate?", "Request for tax certificate", "Insurance tax document"],
+      "responses": ["You can download your tax certificate by logging into your account and selecting 'Tax Documents'. If you require further assistance, please contact support."],
+      "context": [""]
+    },
+    {
+      "tag": "renewal_instructions",
+      "patterns": ["How do I renew my policy?", "Renewal process for insurance", "Steps to renew insurance", "How can I renew my policy?", "I need instructions for policy renewal"],
+      "responses": ["To renew your policy, log into your account and select the 'Renew Policy' option. Follow the on-screen instructions to complete the renewal process."],
+      "context": [""]
+    },
+    {
+      "tag": "account_reactivation",
+      "patterns": ["How do I reactivate my account?", "Reactivate insurance account", "Can I reopen my closed account?", "My account was deactivated, how do I reactivate?", "Steps to reactivate my insurance account"],
+      "responses": ["You can reactivate your account by contacting customer support. They will guide you through the reactivation process."],
+      "context": [""]
+    },
+    {
+      "tag": "covid_coverage",
+      "patterns": ["Does my policy cover COVID-19?", "Is COVID-19 treatment covered?", "Does my health insurance include COVID-19?", "COVID-19 insurance coverage", "Am I covered for COVID-19 under my policy?"],
+      "responses": ["Yes, most of our health insurance policies include coverage for COVID-19 treatment. Please check your policy details or contact support for more information."],
+      "context": [""]
+    },
+    {
+      "tag": "claim_fraud_alert",
+      "patterns": ["How do I report insurance fraud?", "Report fraud claim", "What should I do if I suspect fraud?", "Can I alert you about a fraudulent claim?", "Fraud report process"],
+      "responses": ["If you suspect fraud, please report it immediately by contacting our fraud prevention team. You can also file a report through our website."],
+      "context": [""]
+    },
+    {
+      "tag": "loyalty_benefits",
+      "patterns": ["Do you offer loyalty benefits?", "Loyalty rewards for insurance customers", "Can I earn loyalty points?", "What are the loyalty perks?", "Do you have a loyalty program?"],
+      "responses": ["We offer loyalty benefits for long-term customers, including discounts and exclusive offers. Check your account or contact support to learn more about loyalty rewards."],
+      "context": [""]
+    },
+    {
+      "tag": "health_insurance_coverage",
+      "patterns": ["What does my health insurance cover?", "What is included in my health insurance?", "Health insurance coverage details", "Can you explain my health coverage?", "What medical treatments are covered under my health policy?"],
+      "responses": ["Your health insurance covers hospitalization, doctor visits, surgeries, and more, depending on your plan. Please log into your account or refer to your policy document for specific coverage details."],
+      "context": [""]
+    },
+    {
+      "tag": "network_hospitals",
+      "patterns": ["Which hospitals are in your network?", "Network hospitals list", "Where can I find network hospitals?", "Do you have a list of network hospitals?", "Hospitals covered under my policy"],
+      "responses": ["You can view the list of network hospitals by logging into your account or visiting the 'Network Hospitals' section on our website."],
+      "context": [""]
+    },
+    {
+      "tag": "hospitalization_claim",
+      "patterns": ["How do I claim for hospitalization?", "Hospitalization claim process", "Can I claim my hospital bills?", "How do I submit a hospital claim?", "Claiming for hospital expenses"],
+      "responses": ["To claim hospitalization expenses, submit your claim form along with hospital bills, discharge summary, and other relevant documents. You can upload these through your account or contact support for assistance."],
+      "context": [""]
+    },
+    {
+      "tag": "pre_approval_process",
+      "patterns": ["How does pre-approval work?", "Pre-approval for hospitalization", "What is the pre-authorization process?", "Can I get pre-approved for treatment?", "How do I request pre-approval for hospital expenses?"],
+      "responses": ["Pre-approval for hospitalization can be requested by submitting a pre-authorization form through your account or directly at the network hospital. Check with your hospital to initiate the process."],
+      "context": [""]
+    },
+    {
+      "tag": "home_insurance_coverage",
+      "patterns": ["What does my home insurance cover?", "Is my house covered for fire?", "Does home insurance cover theft?", "Home insurance coverage details", "What is included in my home insurance policy?"],
+      "responses": ["Your home insurance covers damages caused by fire, theft, natural disasters, and more. Please refer to your policy document or log into your account for a detailed list of coverages."],
+      "context": [""]
+    },
+    {
+      "tag": "auto_insurance_coverage",
+      "patterns": ["What does my car insurance cover?", "Auto insurance coverage details", "What is included in my car insurance?", "Can you explain my car insurance coverage?", "Is my car covered for accidents?"],
+      "responses": ["Your car insurance covers accidents, theft, third-party liability, and more. Please log into your account or refer to your policy document for specific coverage details."],
+      "context": [""]
+    },
+    {
+      "tag": "auto_insurance_claim",
+      "patterns": ["How do I claim my car insurance?", "Car insurance claim process", "Can I claim for car damage?", "How do I submit a car insurance claim?", "Claiming car insurance for accidents"],
+      "responses": ["To claim for car insurance, submit your claim form, police report (if required), and photos of the damage. You can upload these through your account or contact support for assistance."],
+      "context": [""]
+    },
+    {
+      "tag": "travel_insurance_coverage",
+      "patterns": ["What does travel insurance cover?", "Is my trip covered for cancellations?", "Travel insurance coverage details", "Can you explain my travel insurance?", "What is included in my travel insurance policy?"],
+      "responses": ["Your travel insurance covers trip cancellations, medical emergencies, lost luggage, and more. Please refer to your policy document or log into your account for specific coverage details."],
+      "context": [""]
+    },
+    {
+      "tag": "travel_insurance_claim",
+      "patterns": ["How do I claim my travel insurance?", "Travel insurance claim process", "Can I claim for trip cancellation?", "How do I submit a travel insurance claim?", "Claiming travel insurance for lost luggage"],
+      "responses": ["To claim for travel insurance, submit your claim form along with relevant documents like cancellation proof, medical reports, or receipts. You can upload these through your account or contact support for help."],
+      "context": [""]
+    },
+    {
+      "tag": "life_insurance_coverage",
+      "patterns": ["What does life insurance cover?", "Life insurance coverage details", "What is included in my life insurance policy?", "Can you explain my life insurance coverage?", "How much coverage does my life insurance provide?"],
+      "responses": ["Your life insurance provides coverage in case of death, terminal illness, or other specified events. Please refer to your policy document or log into your account for specific coverage details."],
+      "context": [""]
+    },
+    {
+      "tag": "life_insurance_claim",
+      "patterns": ["How do I claim life insurance?", "Life insurance claim process", "Can I claim for life insurance?", "How do I submit a life insurance claim?", "Claiming life insurance benefits"],
+      "responses": ["To claim life insurance, the beneficiary must submit a claim form along with the death certificate and any required documents. Please contact support for detailed assistance."],
+      "context": [""]
+    },
+    {
+      "tag": "critical_illness_coverage",
+      "patterns": ["Does my policy cover critical illness?", "What critical illnesses are covered?", "Critical illness coverage details", "Am I covered for cancer?", "Is heart disease covered under my policy?"],
+      "responses": ["Critical illness coverage typically includes conditions like cancer, heart disease, and stroke. Please refer to your policy document or log into your account for a detailed list of covered illnesses."],
+      "context": [""]
+    },
+    {
+      "tag": "claim_denial_appeal",
+      "patterns": ["How do I appeal a denied claim?", "Appeal process for denied claim", "Can I appeal if my claim is rejected?", "What is the process to appeal a claim denial?", "Claim denial appeal steps"],
+      "responses": ["You can appeal a denied claim by submitting a written appeal along with supporting documents. Please contact support for specific instructions on the appeal process."],
+      "context": [""]
+    },
+    {
+      "tag": "claim_resolution_time",
+      "patterns": ["How long will it take to resolve my claim?", "Expected time for claim resolution", "When will my claim be resolved?", "Claim resolution timeline", "How long does it take for claims to be finalized?"],
+      "responses": ["Claim resolution typically takes 7-14 business days, depending on the complexity of the case. You can track the progress through your account."],
+      "context": [""]
+    },
+    {
+      "tag": "premium_breakdown",
+      "patterns": ["Can you break down my premium?", "How is my premium calculated?", "What factors affect my premium?", "Breakdown of premium costs", "Explain my premium calculation"],
+      "responses": ["Your premium is calculated based on factors like age, coverage amount, claims history, and policy type. You can view a detailed breakdown in your account or contact support for further explanation."],
+      "context": [""]
+    },
+    {
+      "tag": "premium_payment_options",
+      "patterns": ["What are my premium payment options?", "How can I pay my premium?", "What methods can I use to pay my premium?", "Can I set up automatic payments?", "Premium payment methods"],
+      "responses": ["You can pay your premium via credit/debit card, net banking, or UPI. We also offer automatic payments if you'd like to set them up."],
+      "context": [""]
+    },
+    {
+      "tag": "automatic_payment_setup",
+      "patterns": ["How do I set up automatic payments?", "Set up auto payments for premium", "Can I automate my premium payments?", "How to enable recurring payments?", "Automatic premium payment setup"],
+      "responses": ["You can set up automatic premium payments through your account by selecting the 'Auto-Pay' option under the 'Payments' section. Contact support if you need assistance."],
+      "context": [""]
+    },
+    {
+      "tag": "premium_payment_failure",
+      "patterns": ["Why did my premium payment fail?", "Premium payment issue", "I can't pay my premium", "Why is my payment not going through?", "Premium payment failure"],
+      "responses": ["Premium payment failures can occur due to insufficient funds, incorrect payment details, or technical issues. Please try again or contact support for further assistance."],
+      "context": [""]
+    },
+    {
+      "tag": "coverage_extension",
+      "patterns": ["Can I extend my coverage?", "How do I extend my insurance policy?", "Can I increase my policy term?", "Extend my insurance coverage", "How to request coverage extension?"],
+      "responses": ["You can extend your coverage by requesting a policy extension through your account or contacting support. Additional premiums may apply for extended coverage."],
+      "context": [""]
+    },
+    {
+      "tag": "premium_late_fee",
+      "patterns": ["Will I be charged a late fee for my premium?", "Late fee for missed premium", "Do I have to pay extra for late premium payment?", "How much is the premium late fee?", "Late payment charges for premium"],
+      "responses": ["If you miss your premium due date, a late fee may be applied based on your policy terms. Please refer to your policy document or contact support for more details."],
+      "context": [""]
+    },
+    {
+      "tag": "coverage_downgrade",
+      "patterns": ["Can I downgrade my coverage?", "How do I reduce my coverage?", "Downgrade my policy", "Can I switch to a lower plan?", "How do I decrease my insurance coverage?"],
+      "responses": ["You can request a downgrade in coverage by logging into your account or contacting support. Downgrading may affect your premium and coverage limits."],
+      "context": [""]
+    },
+    {
+      "tag": "waiting_period",
+      "patterns": ["What is the waiting period for my policy?", "How long is the waiting period for claims?", "Can I claim during the waiting period?", "Waiting period details", "What is the policy waiting period?"],
+      "responses": ["The waiting period for claims depends on your specific policy. It can range from 30 to 90 days for health or critical illness policies. Please refer to your policy document for exact details."],
+      "context": [""]
+    },
+    {
+      "tag": "pre_existing_conditions",
+      "patterns": ["Are pre-existing conditions covered?", "Does my policy cover pre-existing conditions?", "Pre-existing condition coverage", "Can I claim for pre-existing conditions?", "How are pre-existing conditions handled in my policy?"],
+      "responses": ["Coverage for pre-existing conditions depends on the type of policy and waiting period. Please refer to your policy document or contact support to clarify your coverage."],
+      "context": [""]
+    },
+    {
+      "tag": "claim_reimbursement",
+      "patterns": ["How do I get reimbursed for my claim?", "Claim reimbursement process", "When will I receive my claim reimbursement?", "Reimbursement for insurance claim", "How long does reimbursement take?"],
+      "responses": ["Claim reimbursements are processed after claim approval. You can expect to receive reimbursement within 7-14 business days. Please check your account for the status of your reimbursement."],
+      "context": [""]
+    },
+    {
+      "tag": "deductible_explanation",
+      "patterns": ["What is a deductible?", "How does the deductible work?", "Explain insurance deductible", "What does deductible mean in my policy?", "Can you clarify what a deductible is?"],
+      "responses": ["A deductible is the amount you pay out-of-pocket before your insurance coverage kicks in. It varies based on your policy. Please refer to your policy document for your deductible amount."],
+      "context": [""]
+    },
+    {
+      "tag": "claim_assessment",
+      "patterns": ["How is my claim assessed?", "Claim assessment process", "What factors are considered in claim assessment?", "How does claim evaluation work?", "What is the claim review process?"],
+      "responses": ["Your claim is assessed based on the documents submitted, policy coverage, and terms. Our claims team reviews the case to ensure all criteria are met for approval."],
+      "context": [""]
+    },
+    {
+      "tag": "premium_receipt",
+      "patterns": ["How do I get my premium receipt?", "Request premium payment receipt", "Can I download my premium receipt?", "Where can I find my premium payment receipt?", "I need a receipt for my insurance payment"],
+      "responses": ["You can download your premium receipt by logging into your account and selecting 'Payment History'. If you need further assistance, please contact support."],
+      "context": [""]
+    }
+  ]
+}

@@ -8,7 +8,7 @@ from nltk.stem import WordNetLemmatizer
 from keras.models import load_model
 
 lemmatizer = WordNetLemmatizer()
-with open('/Users/sagnik0684/Desktop/Chatbot/intents.json') as file:
+with open('/Users/sagnik0684/Desktop/INSURANCE_MANAGEMENT/Chatbot/intents.json') as file:
     intents = json.load(file)
 words = []
 classes = []

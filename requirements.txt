@@ -12,3 +12,4 @@ keras
 nltk
 numpy
 scikit-learn
+python-decouple

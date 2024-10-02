@@ -27,29 +27,103 @@
     }
     #about-section {
       min-height: 100vh;
-      background-image: url('{% static "image/aboutus.jpeg" %}');
+      background-image: url('{% static "image/about.jpg" %}');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      color: white;
+      color: rgb(0, 0, 0);
       padding: 20px;
     }
     #contact-section {
       min-height: 100vh;
-      background-image: url('{% static "image/Contactus.jpeg" %}');
+      background-image: url('{% static "image/contactus.jpg" %}');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      color: white;
+      color: rgb(0, 0, 0);
       padding: 20px;
     }
   </style>
 </head>
 
+<style>
+  /* Styling for the chatbot container */
+
+  /* AI Button Styling */
+  #ai-button-container {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+  }
+
+  #ai-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  #ai-button img {
+    width: 60px;
+    height: 60px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+
+  #chatbox-container {
+    max-width: 400px;
+    max-height: 300px;
+    position: absolute;
+    top: 20px; /* Adjust the top distance as needed */
+    left: 20px; /* Adjust the left distance as needed */
+    z-index: 1000; /* Ensure it stays above other elements */
+    margin-top: 3%;
+
+  }
+
+  /* Optional: Adjust the chatbot box size and style if needed */
+  #chatbox {
+    flex: 1; /* Allow chatbox to take up available space */
+    max-width: 400px; /* Set a maximum width for the chatbox */
+    max-height: 300px;
+    border: 1px solid #ccc; /* Border around the chatbox */
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px; /* Padding inside the chatbox */
+    background-color: #f9f9f9; /* Light background for the chatbox */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-image: url('/static/image/backgroundai.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-top: 30px;
+    margin-left:20px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    }
+</style>
+
+<script>
+  function toggleChatbot() {
+    var chatbotContainer = document.getElementById('chatbox-container');
+    if (chatbotContainer.style.display === "none") {
+      chatbotContainer.style.display = "block";
+    } else {
+      chatbotContainer.style.display = "none";
+    }
+  }
+</script>
+
 <body>
+  <div id="ai-button-container">
+    <button id="ai-button" onclick="toggleChatbot()">
+      <img src="{% static 'image/helper.png' %}" alt="AI Chatbot" class="img-fluid">
+    </button>
+  </div>
+  
+  <div id="chatbox-container" style="display: none;">
+    {% include 'customer/chatbot.html' %}
+  </div>
   <!-- Include Navbar -->
   {% include "insurance/navbar.html" %}
-  
   <!-- Main Section with Background Image -->
   <section id="main-section" class="jumbotron xyz d-flex justify-content-center align-items-center">
     <div class="container text-center">
@@ -58,6 +132,7 @@
       <!-- What We Offer Button to trigger modal -->
       <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#offerModal">What We Offer</button>
     </div>
+
   </section>
 
   <!-- Modal HTML -->

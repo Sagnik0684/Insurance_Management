@@ -123,6 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 
 STATICFILES_DIRS=[
@@ -147,6 +148,7 @@ EMAIL_RECEIVING_USER = ['your Email'] # email on which you will receive messages
 
 
 # settings.py
+from decouple import config
 
-RAZORPAY_KEY_ID = 'rzp_test_j9hra4FY1ZuJr8'
-RAZORPAY_KEY_SECRET = 'zs1i04fXKgL7h9FxJiY3ttTj'
+RAZORPAY_KEY_ID = config('RAZORPAY_KEY_ID')
+RAZORPAY_KEY_SECRET = config('RAZORPAY_KEY_SECRET')
