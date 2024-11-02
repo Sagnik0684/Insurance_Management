@@ -11,95 +11,89 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
   <style>
-    html {
-      scroll-behavior: smooth;
+    /* General Background for entire page */
+    body {
+      background-color: #9fb8ce; /* Light blue tint */
     }
-    .xyz {
-      margin-bottom: 0px;
-      background-image: url('{% static "image/homepage1.jpg" %}');
-      background-size: cover;
-      background-repeat: no-repeat;
-      height: 100vh;
+
+    /* Styling for jumbotron sections */
+    .jumbotron-section {
+      background-color: #b7d0e6; /* White background for each section */
+      padding: 100px 0;
     }
-    .jumbotron {
+
+    .section-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px;
+    }
+
+    .col-md-6 {
+      max-width: 45%; /* Keeps each column within 45% of the container width */
+    }
+
+    /* Styling for text and image alignment */
+    .text-section {
+      padding: 50px;
+      color: #333; /* Dark text color for readability */
+    }
+
+    .image-section img {
+      max-width: 100%;
+      height: 450px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Chatbot styles remain the same */
+    #ai-button-container {
+      position: absolute;
+      top: 60px;
+      left: 20px;
+    }
+
+    #ai-button {
       background-color: transparent;
-      color: white;
+      border: none;
+      cursor: pointer;
     }
-    #about-section {
-      min-height: 100vh;
-      background-image: url('{% static "image/about.jpg" %}');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      color: rgb(0, 0, 0);
-      padding: 20px;
+
+    #ai-button img {
+      width: 60px;
+      height: 60px;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     }
-    #contact-section {
-      min-height: 100vh;
-      background-image: url('{% static "image/contactus.jpg" %}');
+
+    #chatbox-container {
+      max-width: 400px;
+      max-height: 300px;
+      position: absolute;
+      top: 80px;
+      left: 20px;
+      z-index: 1000;
+      margin-top: 3%;
+    }
+
+    #chatbox {
+      flex: 1;
+      max-width: 400px;
+      max-height: 300px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      background-image: url('/static/image/backgroundai.png');
       background-size: cover;
-      background-position: center;
       background-repeat: no-repeat;
-      color: rgb(0, 0, 0);
-      padding: 20px;
+      background-position: center;
+      margin-top: 30px;
+      margin-left: 20px;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
   </style>
-</head>
-
-<style>
-  /* Styling for the chatbot container */
-
-  /* AI Button Styling */
-  #ai-button-container {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-  }
-
-  #ai-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
-
-  #ai-button img {
-    width: 60px;
-    height: 60px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-
-  #chatbox-container {
-    max-width: 400px;
-    max-height: 300px;
-    position: absolute;
-    top: 20px; /* Adjust the top distance as needed */
-    left: 20px; /* Adjust the left distance as needed */
-    z-index: 1000; /* Ensure it stays above other elements */
-    margin-top: 3%;
-
-  }
-
-  /* Optional: Adjust the chatbot box size and style if needed */
-  #chatbox {
-    flex: 1; /* Allow chatbox to take up available space */
-    max-width: 400px; /* Set a maximum width for the chatbox */
-    max-height: 300px;
-    border: 1px solid #ccc; /* Border around the chatbox */
-    border-radius: 10px; /* Rounded corners */
-    padding: 10px; /* Padding inside the chatbox */
-    background-color: #f9f9f9; /* Light background for the chatbox */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    background-image: url('/static/image/backgroundai.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-top: 30px;
-    margin-left:20px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    }
-</style>
 
 <script>
   function toggleChatbot() {
@@ -112,27 +106,36 @@
   }
 </script>
 
+</head>
+
 <body>
   <div id="ai-button-container">
     <button id="ai-button" onclick="toggleChatbot()">
       <img src="{% static 'image/helper.png' %}" alt="AI Chatbot" class="img-fluid">
     </button>
   </div>
-  
+
   <div id="chatbox-container" style="display: none;">
     {% include 'customer/chatbot.html' %}
   </div>
+
   <!-- Include Navbar -->
   {% include "insurance/navbar.html" %}
-  <!-- Main Section with Background Image -->
-  <section id="main-section" class="jumbotron xyz d-flex justify-content-center align-items-center">
-    <div class="container text-center">
-      <h1>Welcome to Insure Hub</h1>
-      <p>Your peace of mind is our priority.</p>
-      <!-- What We Offer Button to trigger modal -->
-      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#offerModal">What We Offer</button>
-    </div>
 
+  <!-- Main Section -->
+  <section id="main-section" class="jumbotron-section">
+    <div class="container">
+      <div class="row section-content">
+        <div class="col-md-6 text-section">
+          <h1>Welcome to Insure Hub</h1>
+          <p>Your peace of mind is our priority.</p>
+          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#offerModal">What We Offer</button>
+        </div>
+        <div class="col-md-6 image-section">
+          <img src="{% static 'image/homepage1.jpg' %}" alt="Home Image">
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Modal HTML -->
@@ -149,9 +152,9 @@
           <ul class="list-group">
             {% for category in categories %}
             <li class="list-group-item">{{ category.category_name }}</li>
-          {% empty %}
+            {% empty %}
             <li class="list-group-item">No categories available</li>
-          {% endfor %}
+            {% endfor %}
           </ul>
         </div>
         <div class="modal-footer">
@@ -163,21 +166,35 @@
   </div>
 
   <!-- About Us Section -->
-  <section id="about-section" class="jumbotron-fluid d-flex justify-content-center align-items-center xyz-about">
-    <div class="container text-center">
-      <h2>Know Us</h2>
-      <p class="lead">“Your peace of mind is our priority. We protect what matters most, so you can focus on living your life to the fullest.”</p>
-      <h4>Explore our Website</h4>
-      <a class="btn btn-primary btn-lg" href="/" role="button">HOME</a>
+  <section id="about-section" class="jumbotron-section">
+    <div class="container">
+      <div class="row section-content">
+        <div class="col-md-6 image-section">
+          <img src="{% static 'image/about.jpg' %}" alt="About Us Image">
+        </div>
+        <div class="col-md-6 text-section">
+          <h2>Know Us</h2>
+          <p>“Your peace of mind is our priority. We protect what matters most, so you can focus on living your life to the fullest.”</p>
+          <h4>Explore our Website</h4>
+          <a class="btn btn-primary btn-lg" href="/" role="button">HOME</a>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Contact Us Section -->
-  <section id="contact-section" class="umbotron jumbotron-fluid d-flex justify-content-center align-items-center xyz-about">
-    <center>
-      <h3>Send Us Your Valuable Feedback</h3>
-      <br><br><a href="{% url 'feedback' %}" class="btn btn-primary btn-lg">Send Message</a>
-    </center>
+  <section id="contact-section" class="jumbotron-section">
+    <div class="container">
+      <div class="row section-content">
+        <div class="col-md-6 text-section">
+          <h3>Send Us Your Valuable Feedback</h3>
+          <br><a href="{% url 'feedback' %}" class="btn btn-primary btn-lg">Send Message</a>
+        </div>
+        <div class="col-md-6 image-section">
+          <img src="{% static 'image/contactus.jpg' %}" alt="Contact Us Image">
+        </div>
+      </div>
+    </div>
   </section>
 
   {% include "insurance/footer.html" %}

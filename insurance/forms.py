@@ -11,7 +11,7 @@ class ContactusForm(forms.Form):
 class CategoryForm(forms.ModelForm):
     class Meta:
         model=models.Category
-        fields=['category_name']
+        fields=['category_name', 'image']
 
 class PolicyForm(forms.ModelForm):
     category=forms.ModelChoiceField(queryset=models.Category.objects.all(),empty_label="Category Name", to_field_name="id")
