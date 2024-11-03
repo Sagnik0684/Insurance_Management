@@ -1,6 +1,6 @@
 {% extends 'insurance/adminbase.html' %}
 {% block content %}
-{%load static%}
+{% load static %}
 
 <head>
   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -19,8 +19,14 @@
     .row {
       margin: 100px;
     }
+
+    .category-image {
+      width: 100px;
+      height: auto;
+    }
   </style>
 </head>
+
 <br><br>
 <div class="container">
   <div class="panel panel-primary">
@@ -30,19 +36,20 @@
     <table class="table table-hover" id="dev-table">
       <thead>
         <tr>
-        <th>Serial No.</th>
+          <th>Serial No.</th>
           <th>Category Name</th>
-          <th> Creation Date</th>
-          
+          <th>Creation Date</th>
         </tr>
       </thead>
-      {% for t in categories %}
-      <tr>
-        <td> {{ forloop.counter }}</td>
-        <td> {{t.category_name}}</td>
-        <td>{{t.creation_date}}</td>
-      </tr>
-      {% endfor %}
+      <tbody>
+        {% for t in categories %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ t.category_name }}</td>
+          <td>{{ t.creation_date }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
     </table>
   </div>
 </div>

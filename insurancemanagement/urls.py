@@ -28,8 +28,7 @@ urlpatterns = [
     path('admin-add-category', views.admin_add_category_view,name='admin-add-category'),
     path('admin-delete-category', views.admin_delete_category_view,name='admin-delete-category'),
     path('delete-category/<int:pk>', views.delete_category_view,name='delete-category'),
-
-
+    
     path('admin-policy', views.admin_policy_view,name='admin-policy'),
     path('admin-add-policy', views.admin_add_policy_view,name='admin-add-policy'),
     path('admin-view-policy', views.admin_view_policy_view,name='admin-view-policy'),

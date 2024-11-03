@@ -103,7 +103,7 @@ def admin_category_view(request):
 def admin_add_category_view(request):
     categoryForm=forms.CategoryForm() 
     if request.method=='POST':
-        categoryForm=forms.CategoryForm(request.POST, request.FILES)
+        categoryForm=forms.CategoryForm(request.POST)
         if categoryForm.is_valid():
             categoryForm.save()
             return redirect('admin-view-category')
