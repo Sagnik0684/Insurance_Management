@@ -20,6 +20,7 @@
     .jumbotron-section {
       background-color: #b7d0e6; /* White background for each section */
       padding: 100px 0;
+      animation: fadeIn 1s ease-in-out;
     }
 
     .section-content {
@@ -27,6 +28,17 @@
       align-items: center;
       justify-content: center;
       padding: 100px;
+      animation: slideUp 1.2s ease-in-out;
+    }
+    /* Fade-in and slide-up animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     .col-md-6 {
@@ -37,6 +49,7 @@
     .text-section {
       padding: 50px;
       color: #333; /* Dark text color for readability */
+      animation: fadeIn 1s ease-in-out;
     }
 
     .image-section img {
@@ -44,6 +57,10 @@
       height: auto;
       border-radius: 10px;
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .image-section img:hover {
+      transform: scale(1.05);
     }
 
     /* Chatbot styles remain the same */
@@ -51,6 +68,7 @@
       position: absolute;
       top: 60px;
       left: 20px;
+      animation: fadeIn 1s ease-in-out;
     }
 
     #ai-button {
@@ -63,6 +81,10 @@
       width: 60px;
       height: 60px;
       box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    #ai-button img:hover {
+      transform: scale(1.1);
     }
 
     #chatbox-container {
@@ -73,6 +95,7 @@
       left: 20px;
       z-index: 1000;
       margin-top: 3%;
+      animation: fadeIn 0.5s ease-in-out;
     }
 
     #chatbox {
